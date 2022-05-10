@@ -217,8 +217,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 	   //Aquí debería indicar el formato de fuente en las celdas, que dependerá del estado del índice
 	   
 	   CellStyle style = wb.createCellStyle();
-	   // No existe getState???
-	   // solo hay que solucionar esto
+	   // TODO: No existe getState??? --> se implementará
 	   style.setFont((Font) formater.getIndicatorFont(indicator.getState()));
 
 	   row.createCell(cellIndex++).setCellValue(indicator.getName());
