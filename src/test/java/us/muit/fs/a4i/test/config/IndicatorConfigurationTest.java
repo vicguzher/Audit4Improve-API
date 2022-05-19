@@ -67,6 +67,8 @@ class IndicatorConfigurationTest {
 	 */
 	@Test
 	void testSetAppIndicators() {
+		String prueba = "metrica1,2,3y4";
+		
 		
 	}
 
