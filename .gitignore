@@ -1,5 +1,7 @@
 # Ignore Gradle project-specific cache directory
 .gradle
+#No quiero subir el fichero de configuración de gradle, porque contiene secretos
+gradle.properties
 #Ignoro los directorios que crea el IDE en el espacio de trabajo, que no se suba a git
 .settings
 .metadata

@@ -23,7 +23,7 @@ public interface ReportManagerI {
     
     /**
      * <p>Recupera el informe que se están manejando</p>
-     * @return
+     * @return Devuelve el informe manejado
      */
 	public ReportI getReport();
 	/**
