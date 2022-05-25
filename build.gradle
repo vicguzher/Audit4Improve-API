@@ -18,7 +18,7 @@ plugins {
     //Plugin para análisis estático de código
     id "nebula.lint" version "17.7.0"
 }
-version = '0.0'
+//version = '2.0'
 tasks.withType(JavaCompile) {
     //Añadir la opción Xlint
     options.deprecation = true
