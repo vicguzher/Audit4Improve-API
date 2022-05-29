@@ -12,8 +12,9 @@ import us.muit.fs.a4i.config.IndicatorConfiguration;
 
 import javax.json.*;
 
-public class Checker {
-
+public class Checker(IndicatorsConfiguration indConf, MetricsConfiguration metricConf){
+	private String a4iMetrics = "a4iDefault.json";
+	private String appMetrics = null;
 	private static Logger log = Logger.getLogger(Checker.class.getName());
 	
 	public HashMap<String,String> getMetricInfo(String metricName) throws FileNotFoundException {
@@ -33,7 +34,6 @@ public class Checker {
 			isr=new InputStreamReader(is);
 			metricDefinition = getMetricInfo(metricName, isr);
 		}
-
 		return metricDefinition;
 	}
 	
@@ -63,14 +63,8 @@ public class Checker {
 				metricDefinition.put("description", metrics.get(i).asJsonObject().getString("description"));
 				metricDefinition.put("unit", metrics.get(i).asJsonObject().getString("unit"));
 				metricDefinition.put("type", metrics.get(i).asJsonObject().getString("type"));	
-
 			}
 		}
-
 		return metricDefinition;
 	}
-
-	private IndicatorsConfigurationI indConf; 
-	private MetricsConfigurationI metricConf; 
-
 }

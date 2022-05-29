@@ -1,6 +1,15 @@
 
 package us.muit.fs.a4i.control;
 
+import java.util.HashMap;
+import java.io.FileNotFoundException;
+import java.util.logging.Logger;
+import javax.json.JsonReader;
+import java.util.logging.Logger;
+import javax.json.JsonObject;
+import javax.json.JsonArray;
+import java.io.InputStreamReader;
+
 import us.muit.fs.a4i.exceptions.IndicatorException;
 import us.muit.fs.a4i.model.entities.ReportI;
 
@@ -8,6 +17,7 @@ public class MetricConfiguration {
 
     private String a4iMetrics = "a4iDefault.json";
 	private String appMetrics = null;
+	private static Logger log = Logger.getLogger(Checker.class.getName());
 
     private HashMap<String,String> isDefinedMetric(String metricName, String metricType, InputStreamReader isr)
 			throws FileNotFoundException {
@@ -68,8 +78,6 @@ public class MetricConfiguration {
 		}
 
 		return metricDefinition;
-	}
-
-        
-    } 
+		}
+	} 
 }
