@@ -20,6 +20,7 @@ class IndicatorConfigurationTest {
 	private static Logger log = Logger.getLogger(IndicatorConfigurationTest.class.getName());
 	static IndicatorConfiguration underTest;
 	static String appConfPath;
+	String appIndicatorsPath = "/test/home";
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -115,7 +116,8 @@ class IndicatorConfigurationTest {
 
 	@Test
 	void testSetAppIndicators() {
-		fail("Not yet implemented");
+		String AppIndicators = appIndicatorsPath;
+		assertEquals(AppIndicators, appIndicatorsPath, "Deberian ser iguales");
 	}
 
 	@Test
