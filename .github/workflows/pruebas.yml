@@ -28,6 +28,7 @@ jobs:
           ./gradlew build
   Test:
     runs-on: ubuntu-latest
+    needs: Build
     env:
       GITHUB_LOGIN: ${{ github.actor }}
       GITHUB_PACKAGES: ${{ secrets.GITHUB_TOKEN }}
