@@ -6,6 +6,7 @@ package us.muit.fs.a4i.test.config;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +21,7 @@ import us.muit.fs.a4i.config.Context;
  *
  */
 class ContextTest {
-
+	private static Logger log = Logger.getLogger(CheckerTest.class.getName());
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -78,8 +79,8 @@ class ContextTest {
 	 */
 	@Test
 	void testGetPersistenceType() {
-		try {
-			assertEquals(Context.getContext().getPersistenceType(),"excel","Debería estar definido el tipo excel por defecto en a4i.conf");
+		try {					
+			assertEquals("excel",Context.getContext().getPersistenceType(),"Debería estar definido el tipo excel por defecto en a4i.conf");
 		} catch (IOException e) {
 			fail("El fichero no se localiza");
 			e.printStackTrace();
@@ -92,7 +93,7 @@ class ContextTest {
 	@Test
 	void testGetRemoteType() {
 		try {
-			assertEquals(Context.getContext().getPersistenceType(),"github","Debería estar definido el tipo github por defecto en a4i.conf");
+			assertEquals("github",Context.getContext().getRemoteType(),"Debería estar definido el tipo github por defecto en a4i.conf");
 		} catch (IOException e) {
 			fail("El fichero no se localiza");
 			e.printStackTrace();
