@@ -119,7 +119,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 			 * <p>Verifico si la hoja existe y si es así la extraigo</p>
 			 * <p>Si no existe la creo.
 			 */
-			  sheet= wb.getSheet(report.getId().replaceAll("/", "."));
+			  sheet= wb.getSheet(report.getEntityId().replaceAll("/", "."));
 			  
 			  if(sheet!=null) {
 				  log.info("Recuperada hoja, que ya existía");
@@ -129,7 +129,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 				  int index = wb.getSheetIndex(sheet);
 				  wb.removeSheetAt(index);
 			  }
-			  sheet=wb.createSheet(report.getId().replaceAll("/", "."));
+			  sheet=wb.createSheet(report.getEntityId().replaceAll("/", "."));
 			  log.info("Creada hoja nueva");
 				
 		}
