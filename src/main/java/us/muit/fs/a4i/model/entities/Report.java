@@ -40,13 +40,13 @@ public class Report implements ReportI {
 	 * 
 	 * */
 	 
-	private HashMap<String,Metric> metrics;
+	private HashMap<String,ReportItem> metrics;
 	
 	/**
 	 * Mapa de indicadores
 	 */
 		
-	private HashMap<String,Indicator> indicators;
+	private HashMap<String,ReportItem> indicators;
 	
 	public Report(){
 		createMaps();
@@ -66,8 +66,8 @@ public class Report implements ReportI {
 		this.id=id;		
 	}	
 	private void createMaps() {
-		metrics=new HashMap<String,Metric>();
-		indicators=new HashMap<String,Indicator>();
+		metrics=new HashMap<String,ReportItem>();
+		indicators=new HashMap<String,ReportItem>();
 	}
 	/**
 	 * <p>Busca la métrica solicita en el informe y la devuelve</p>
@@ -76,9 +76,9 @@ public class Report implements ReportI {
 	 * @return la métrica localizada
 	 */
 	@Override
-	public Metric getMetricByName(String name) {
+	public ReportItem getMetricByName(String name) {
 		log.info("solicitada métrica de nombre "+name);
-		Metric metric=null;
+		ReportItem metric=null;
 		
 		if (metrics.containsKey(name)){
 			log.info("La métrica está en el informe");
@@ -91,7 +91,7 @@ public class Report implements ReportI {
 	 */
 
 	@Override
-	public void addMetric(Metric met) {		
+	public void addMetric(ReportItem met) {		
 		metrics.put(met.getName(), met);
 		log.info("Añadida métrica "+met+" Con nombre "+met.getName());
 	}
@@ -102,9 +102,9 @@ public class Report implements ReportI {
 	 * @return el indicador localizado
 	 */
 	@Override
-	public Indicator getIndicatorByName(String name) {
+	public ReportItem getIndicatorByName(String name) {
 		log.info("solicitado indicador de nombre "+name);
-		Indicator indicator=null;
+		ReportItem indicator=null;
 		
 		if (indicators.containsKey(name)){
 			indicator=indicators.get(name);
@@ -116,7 +116,7 @@ public class Report implements ReportI {
  * 
  */ 
 	@Override
-	public void addIndicator(Indicator ind) {
+	public void addIndicator(ReportItem ind) {
 		
 		indicators.put(ind.getName(), ind);
 		log.info("Añadido indicador "+ind);
@@ -167,7 +167,7 @@ public class Report implements ReportI {
 		return repoinfo;
 	}
 	@Override
-	public <Metric> getAllMetrics() {
+	public Collection<ReportItem> getAllMetrics() {
 		// TODO Auto-generated method stub
 		return metrics.values();
 	}
@@ -188,5 +188,7 @@ public class Report implements ReportI {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

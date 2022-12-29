@@ -41,6 +41,12 @@ public interface ReportItemI<T> {
 	 */
 	public String getUnit();
 	
+	/** 
+	 * Consulta el indicador
+	 * @return el indicador
+	 */
+	public Indicator getIndicator();
+	
 	// getIndicator no existe, no sabemos si hay que crearla o como
 	
 	/***

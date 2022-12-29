@@ -30,6 +30,7 @@ import us.muit.fs.a4i.model.entities.Indicator;
 import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.Report;
 import us.muit.fs.a4i.model.entities.ReportI;
+import us.muit.fs.a4i.model.entities.ReportItem;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -65,11 +66,11 @@ class ReportTest {
 	private ArgumentCaptor<Report> reportCaptor;
 	
 	@Mock(serializable = true)
-	private static Metric<Integer> metricIntMock= Mockito.mock(Metric.class);
+	private static ReportItem metricIntMock= Mockito.mock(ReportItem.class);
 	@Mock(serializable = true)
-	private static Metric<Date> metricDatMock= Mockito.mock(Metric.class);
+	private static ReportItem metricDatMock= Mockito.mock(ReportItem.class);
 	@Mock(serializable = true)
-	private static Indicator<Integer> indicatorIntMock= Mockito.mock(Indicator.class);
+	private static ReportItem<Integer> indicatorIntMock= Mockito.mock(ReportItem.class);
 	
 
 	private static Report reportTested;
@@ -153,7 +154,7 @@ class ReportTest {
 		//Prueba a sustituir por la línea comentada
 		//Mockito.verify(metricIntMock).getName();
 		Mockito.verify(metricIntMock, atLeast(1)).getName();
-		Metric metric=reportTested.getMetricByName("issues");
+		ReportItem metric=reportTested.getMetricByName("issues");
 		assertEquals(metric.getValue(),3,"Debería tener el valor especificado en el mock");
 		assertEquals(metric.getDescription(),"Tareas sin finalizar en el repositorio","Debería tener el valor especificado en el mock");
 		

@@ -15,30 +15,39 @@ import java.util.Collection;
 import us.muit.fs.a4i.config.Context;
 import us.muit.fs.a4i.exceptions.MetricException;
 import us.muit.fs.a4i.model.entities.Indicator.IndicatorBuilder;
-
+import us.muit.fs.a4i.model.entities.ReportItemI;
 /**
- * @author Isabel RomÃ¡n
+ * @author Isabel Román
+ * Entidad para guardar la información de un indicador o una métrica, elementos de un informe
  *
  */
-public class ReportItem<T> {
+public class ReportItem<T> implements ReportItemI<T>{
 	private Indicator<T> indicator = null;
 	private static Logger log=Logger.getLogger(ReportItem.class.getName());
 	/**
-	 * Obligatorio
+	 * Nombre del indicador/métrica
 	 */
 	private String name;
 	/**
-	 * Obligatorio
+	 * Valor del indicador/métrica
 	 */
 	private T value;
 	/**
 	 * Obligatorio
-	 * Fecha en la que se tomÃ³ la medida (por defecto cuando se crea el objeto)
+	 * Fecha en la que se construye el objeto o se toma la medida
 	 */
 	private Date date;
-	
+	/**
+	 * Descripción del elemento del informe
+	 */
 	private String description;
+	/**
+	 * Origen del elemento
+	 */
 	private String source;
+	/**
+	 * Unidades de medida
+	 */
 	private String unit;
 
 	/**
@@ -130,26 +139,29 @@ public class ReportItem<T> {
 		private T value;
 		private String source;
 		private String unit;
-		private Collection<ReportItem<T>> metrics;
-		private ReportItem<T> metric;
-		private IndicatorBuilder<T> state;
-		public ReportItemBuilder(String reportItemName, T reportItemValue) throws MetricException {
+		private Collection<ReportItem> metrics;
+		private ReportItem metric;
+		private IndicatorBuilder state;
+		public ReportItemBuilder(String name, T value) throws MetricException {
 			HashMap<String,String> reportItemDefinition=null;
+			/**
+			 * Verifico si el elemento está definido y el tipo es correcto
+			 */
 			//el nombre incluye java.lang, si puede eliminar si se manipula la cadena
 			//hay que quedarse sÃ³lo con lo que va detrÃ¡s del Ãºltimo punto o meter en el fichero el nombre completo
 			//Pero Â¿y si se usan tipos definidos en otras librerÃ­as? usar el nombre completo "desambigua" mejor
-			log.info("Verifico el ReportItem de nombre "+reportItemName+" con valor de tipo "+reportItemValue.getClass().getName());
+			log.info("Verifico el ReportItem de nombre "+name+" con valor de tipo "+value.getClass().getName());
 			try {
-			reportItemDefinition=Context.getContext().getChecker().definedReportItem(reportItemName,reportItemValue.getClass().getName());
+			reportItemDefinition=Context.getContext().getChecker().definedReportItem(name,value.getClass().getName());
 					
 			if(reportItemDefinition!=null) {				
-				this.name=reportItemName;
-				this.value=reportItemValue;			
+				this.name=name;
+				this.value=value;			
 				this.date=Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 				this.description=reportItemDefinition.get("description");
 				this.unit=reportItemDefinition.get("unit");
 			}else {
-				throw new MetricException("Métrica "+reportItemName+" no definida o tipo "+reportItemValue.getClass().getName()+" incorrecto");
+				throw new MetricException("Métrica "+name+" no definida o tipo "+value.getClass().getName()+" incorrecto");
 			}
 			}catch(IOException e) {
 				throw new MetricException("El fichero de configuración de ReportItem no se puede abrir");

@@ -19,6 +19,8 @@ import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.Metric.MetricBuilder;
 import us.muit.fs.a4i.model.entities.Report;
 import us.muit.fs.a4i.model.entities.ReportI;
+import us.muit.fs.a4i.model.entities.ReportItem;
+import us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder;
 
 /**
  * @author Isabel Román
@@ -70,42 +72,48 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 			 * Métricas directas de tipo conteo
 			 */
 
-			MetricBuilder<Integer> subscribers = new Metric.MetricBuilder<Integer>("subscribers",
+		/*	MetricBuilder<Integer> subscribers = new Metric.MetricBuilder<Integer>("subscribers",
+					remoteRepo.getSubscribersCount());*/
+			ReportItemBuilder<Integer> subscribers = new ReportItem.ReportItemBuilder<Integer>("subscribers",
 					remoteRepo.getSubscribersCount());
 			subscribers.source("GitHub");
 			myRepo.addMetric(subscribers.build());
 			log.info("Añadida métrica suscriptores " + subscribers);
 
-			MetricBuilder<Integer> forks = new Metric.MetricBuilder<Integer>("forks", remoteRepo.getForksCount());
+			/*MetricBuilder<Integer> forks = new Metric.MetricBuilder<Integer>("forks", remoteRepo.getForksCount());
+			forks.source("GitHub");*/
+			ReportItemBuilder<Integer> forks = new ReportItem.ReportItemBuilder<Integer>("forks", remoteRepo.getForksCount());
 			forks.source("GitHub");
 			myRepo.addMetric(forks.build());
 			log.info("Añadida métrica forks " + forks);
 
-			MetricBuilder<Integer> watchers = new Metric.MetricBuilder<Integer>("watchers",
+			/*MetricBuilder<Integer> watchers = new Metric.MetricBuilder<Integer>("watchers",
+					remoteRepo.getWatchersCount());*/
+			ReportItemBuilder<Integer> watchers = new ReportItem.ReportItemBuilder<Integer>("watchers",
 					remoteRepo.getWatchersCount());
 			watchers.source("GitHub");
 			myRepo.addMetric(watchers.build());
 
-			MetricBuilder<Integer> stars = new Metric.MetricBuilder<Integer>("stars", remoteRepo.getStargazersCount());
+			ReportItemBuilder<Integer> stars = new ReportItem.ReportItemBuilder<Integer>("stars", remoteRepo.getStargazersCount());
 			stars.source("GitHub");
 			myRepo.addMetric(stars.build());
 
-			MetricBuilder<Integer> issues = new Metric.MetricBuilder<Integer>("issues", remoteRepo.getOpenIssueCount());
+			ReportItemBuilder<Integer> issues = new ReportItem.ReportItemBuilder<Integer>("issues", remoteRepo.getOpenIssueCount());
 			issues.source("GitHub");
 			myRepo.addMetric(issues.build());
 			/**
 			 * Métricas directas de tipo fecha
 			 */
 
-			MetricBuilder<Date> creation = new Metric.MetricBuilder<Date>("creation", remoteRepo.getCreatedAt());
+			ReportItemBuilder<Date> creation = new ReportItem.ReportItemBuilder<Date>("creation", remoteRepo.getCreatedAt());
 			creation.source("GitHub");
 			myRepo.addMetric(creation.build());
 
-			MetricBuilder<Date> push = new Metric.MetricBuilder<Date>("lastPush", remoteRepo.getPushedAt());
+			ReportItemBuilder<Date> push = new ReportItem.ReportItemBuilder<Date>("lastPush", remoteRepo.getPushedAt());
 			push.description("Último push realizado en el repositorio").source("GitHub");
 			myRepo.addMetric(push.build());
 
-			MetricBuilder<Date> updated = new Metric.MetricBuilder<Date>("lastUpdated", remoteRepo.getUpdatedAt());
+			ReportItemBuilder<Date> updated = new ReportItem.ReportItemBuilder<Date>("lastUpdated", remoteRepo.getUpdatedAt());
 			push.description("Última actualización").source("GitHub");
 			myRepo.addMetric(updated.build());
 			/**
@@ -126,12 +134,12 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 				}
 
 			}
-			MetricBuilder<Integer> totalAdditions = new Metric.MetricBuilder<Integer>("totalAdditions", additions);
+			ReportItemBuilder<Integer> totalAdditions = new ReportItem.ReportItemBuilder<Integer>("totalAdditions", additions);
 			totalAdditions.source("GitHub, calculada")
 					.description("Suma el total de adiciones desde que el repositorio se creó");
 			myRepo.addMetric(totalAdditions.build());
 
-			MetricBuilder<Integer> totalDeletions = new Metric.MetricBuilder<Integer>("totalDeletions", deletions);
+			ReportItemBuilder<Integer> totalDeletions = new ReportItem.ReportItemBuilder<Integer>("totalDeletions", deletions);
 			totalDeletions.source("GitHub, calculada")
 					.description("Suma el total de borrados desde que el repositorio se creó");
 			myRepo.addMetric(totalDeletions.build());
@@ -148,7 +156,7 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 	 */
 
 	@Override
-	public Metric getMetric(String metricName, String repositoryId) throws MetricException {
+	public ReportItem getMetric(String metricName, String repositoryId) throws MetricException {
 		GHRepository remoteRepo;
 
 		GitHub gb = getConnection();
@@ -169,8 +177,8 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
  * @return La métrica creada
  * @throws MetricException Si la métrica no está definida se lanzará una excepción
  */
-	private Metric getMetric(String metricName, GHRepository remoteRepo) throws MetricException {
-		Metric metric;
+	private ReportItem getMetric(String metricName, GHRepository remoteRepo) throws MetricException {
+		ReportItem metric;
 		if (remoteRepo == null) {
 			throw new MetricException("Intenta obtener una métrica sin haber obtenido los datos del repositorio");
 		}
@@ -202,8 +210,8 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 	 * @return la métrica con el número total de adiciones desde el inicio
 	 * @throws MetricException Intenta crear una métrica no definida
 	 */
-	private Metric getTotalAdditions(GHRepository remoteRepo) throws MetricException {
-		Metric metric = null;
+	private ReportItem getTotalAdditions(GHRepository remoteRepo) throws MetricException {
+		ReportItem metric = null;
 
 		GHRepositoryStatistics data = remoteRepo.getStatistics();
 		List<CodeFrequency> codeFreq;
@@ -221,7 +229,7 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 
 				}
 			}
-			MetricBuilder<Integer> totalAdditions = new Metric.MetricBuilder<Integer>("totalAdditions", additions);
+			ReportItemBuilder<Integer> totalAdditions = new ReportItem.ReportItemBuilder<Integer>("totalAdditions", additions);
 			totalAdditions.source("GitHub, calculada")
 					.description("Suma el total de adiciones desde que el repositorio se creó");
 			metric = totalAdditions.build();
@@ -243,8 +251,8 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 	 * @return la métrica con el número total de eliminaciones desde el inicio
 	 * @throws MetricException Intenta crear una métrica no definida
 	 */
-	private Metric getTotalDeletions(GHRepository remoteRepo) throws MetricException {
-		Metric metric = null;
+	private ReportItem getTotalDeletions(GHRepository remoteRepo) throws MetricException {
+		ReportItem metric = null;
 
 		GHRepositoryStatistics data = remoteRepo.getStatistics();
 		List<CodeFrequency> codeFreq;
@@ -262,7 +270,7 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 
 				}
 			}
-			MetricBuilder<Integer> totalDeletions = new Metric.MetricBuilder<Integer>("totalDeletions", deletions);
+			ReportItemBuilder<Integer> totalDeletions = new ReportItem.ReportItemBuilder<Integer>("totalDeletions", deletions);
 			totalDeletions.source("GitHub, calculada")
 					.description("Suma el total de eliminaciones desde que el repositorio se creó");
 			metric = totalDeletions.build();

@@ -28,6 +28,7 @@ import us.muit.fs.a4i.exceptions.ReportNotDefinedException;
 import us.muit.fs.a4i.model.entities.Indicator;
 import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.ReportI;
+import us.muit.fs.a4i.model.entities.ReportItem;
 
 
 
@@ -162,8 +163,8 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
     		    rowIndex++;
     			sheet.createRow(rowIndex).createCell(0).setCellValue("Métricas tomadas el día ");
     			sheet.getRow(rowIndex).createCell(1).setCellValue(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)).toString());
-    			Collection<Metric> collection=report.getAllMetrics();
-    			for(Metric metric:collection) {
+    			Collection<ReportItem> collection=report.getAllMetrics();
+    			for(ReportItem metric:collection) {
     				persistMetric(metric);
     			}
     
@@ -177,7 +178,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
     		}
     	}
 
-   private void persistMetric(Metric metric) {
+   private void persistMetric(ReportItem metric) {
 	   log.info("Introduzco métrica en la hoja");	   
 	  
 	   int rowIndex=sheet.getLastRowNum();

@@ -45,6 +45,93 @@ public class Checker {
 		appMetrics = appMetricsPath;
 	}
 
+
+	/**
+	 * <p>
+	 * Comprueba si el elemento está definido en el fichero por defecto o en el de
+	 * la aplicación cliente
+	 * </p>
+	 * <p>
+	 * También verifica que el tipo es el adecuado
+	 * </p>
+	 * 
+	 * @param indicatorName nombre del indicador que se quiere comprobar
+	 * @param indicatorType tipo del indicador
+	 * @return indicatorDefinition Si el indicador está definido y el tipo es correcto se devuelve un mapa con las unidades y la descripción
+	 * @throws FileNotFoundException Si no se localiza el fichero de configuración
+	 */
+	public HashMap<String,String> definedReportItem(String name, String type) throws FileNotFoundException {
+		HashMap<String,String> itemDefinition=null;
+		log.info("Checker solicitud de búsqueda del elemento " + name);
+		boolean defined = false;
+		
+		
+		String filePath="/"+a4iMetrics;
+		log.info("Buscando el archivo " + filePath);
+		InputStream is=this.getClass().getResourceAsStream(filePath);
+		log.info("InputStream "+is+" para "+filePath);
+		InputStreamReader isr = new InputStreamReader(is);
+		
+	
+				
+		itemDefinition = isDefinedReportItem(name, type, isr);
+		if ((itemDefinition==null) && appMetrics != null) {
+			is=new FileInputStream(appMetrics);
+			isr=new InputStreamReader(is);			
+			itemDefinition = isDefinedReportItem(name, type, isr);
+		}
+
+		return itemDefinition;
+	}
+
+	private  HashMap<String,String> isDefinedReportItem(String name, String type, InputStreamReader isr)
+			throws FileNotFoundException {
+		HashMap<String,String> itemDefinition=null;
+	
+		JsonReader reader = Json.createReader(isr);
+		log.info("Creo el JsonReader");
+
+		JsonObject confObject = reader.readObject();
+		log.info("Leo el objeto");
+		reader.close();
+
+		log.info("Muestro la configuración leída " + confObject);
+		JsonArray items = confObject.getJsonArray("indicators");
+		log.info("El número de indicadores es " + items.size());
+		for (int i = 0; i < items.size(); i++) {
+			log.info("nombre: " + items.get(i).asJsonObject().getString("name"));
+			if (items.get(i).asJsonObject().getString("name").equals(name)) {
+				log.info("Localizado el elemento");
+				log.info("tipo: " + items.get(i).asJsonObject().getString("type"));
+				if (items.get(i).asJsonObject().getString("type").equals(type)) {
+					itemDefinition=new HashMap<String,String>();
+					itemDefinition.put("description", items.get(i).asJsonObject().getString("description"));
+					itemDefinition.put("unit", items.get(i).asJsonObject().getString("unit"));
+				}
+
+			}
+		}
+		
+		items = confObject.getJsonArray("metrics");
+		log.info("El número de métricas es " + items.size());
+		for (int i = 0; i < items.size(); i++) {
+			log.info("nombre: " + items.get(i).asJsonObject().getString("name"));
+			if (items.get(i).asJsonObject().getString("name").equals(name)) {
+				log.info("Localizado el elemento");
+				log.info("tipo: " + items.get(i).asJsonObject().getString("type"));
+				if (items.get(i).asJsonObject().getString("type").equals(type)) {
+					itemDefinition=new HashMap<String,String>();
+					itemDefinition.put("description", items.get(i).asJsonObject().getString("description"));
+					itemDefinition.put("unit", items.get(i).asJsonObject().getString("unit"));
+				}
+
+			}
+		}
+
+		return itemDefinition;
+	}
+	
+	
 	/**
 	 * <p>
 	 * Comprueba si la métrica está definida en el fichero por defecto o en el de la

@@ -31,8 +31,8 @@ import us.muit.fs.a4i.model.entities.ReportItem;
  * @author Isabel Román
  *
  */
-class ReportItemBuilderTest {
-	private static Logger log = Logger.getLogger(ReportItemBuilderTest.class.getName());
+class ReportItemTest {
+	private static Logger log = Logger.getLogger(ReportItemTest.class.getName());
 
 	/**
 	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente los tests con eclipse
@@ -72,7 +72,7 @@ class ReportItemBuilderTest {
 	 * @see org.junit.jupiter.api.Test
 	 */
 	@Test
-	@Tag("integración")
+	@Tag("unidad")
 	@DisplayName("Prueba constructor reportItem, las clases Context y Checker ya están disponibles")
 	void testReportItemBuilder() {
 		
@@ -81,7 +81,7 @@ class ReportItemBuilderTest {
 		try {
 			underTest = new ReportItemBuilder<Integer>("watchers", 33);
 		} catch (MetricException e) {
-			fail("No debería haber saltado esta excepción");
+			fail("Watchers existe y no debería haber saltado esta excepción");
 			e.printStackTrace();
 		}
 		ReportItem newMetric = underTest.build();
@@ -147,12 +147,12 @@ class ReportItemBuilderTest {
 				try {
 					underTest = new ReportItemBuilder<Integer>("watchers", 33);
 				} catch (MetricException e) {
-					fail("No debería haber saltado esta excepciÃ³n");
+					fail("El elemento watchers existe, no debería haber saltado esta excepciÃ³n");
 					e.printStackTrace();
 				}
 				underTest.source("GitHub");
 				ReportItem newMetric = underTest.build();
-				log.info("Métrica creada "+newMetric.toString());			
+				log.info("Métrica creada: "+newMetric.toString());			
 				assertEquals("GitHub",newMetric.getSource(),"Source no tiene el valor esperado");
 			
 	}

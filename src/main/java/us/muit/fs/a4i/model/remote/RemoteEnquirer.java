@@ -9,6 +9,7 @@ import us.muit.fs.a4i.exceptions.MetricException;
 
 import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.ReportI;
+import us.muit.fs.a4i.model.entities.ReportItem;
 
 /**
  * <p>Interfaz para desacoplar el mecanismo de obtención de métricas del servidor remoto que se use como fuente de las mismas</p>
@@ -33,7 +34,7 @@ public interface RemoteEnquirer{
 	 * @return La nueva métrica construida tras la consulta al remoto
 	 * @throws MetricException Si la métrica no está definida
 	 */
-	public Metric getMetric(String metricName,String entityId) throws MetricException;
+	public ReportItem getMetric(String metricName,String entityId) throws MetricException;
 
 	/**
 	 * <p>Devuelve las métricas que el objeto RemoteEnquirer concreto puede obtener del servidor remoto</p>
