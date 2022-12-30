@@ -153,13 +153,13 @@ public class ReportItem<T> implements ReportItemI<T>{
 			log.info("Verifico el ReportItem de nombre "+name+" con valor de tipo "+value.getClass().getName());
 			try {
 				//Compruebo si es un indicador
-			reportItemDefinition=Context.getContext().getChecker().definedIndicator(name,value.getClass().getName());
+			reportItemDefinition=Context.getContext().getChecker().getIndicatorConfiguration().definedIndicator(name,value.getClass().getName());
 					
 			if(reportItemDefinition!=null) {				
 				this.indicator=new Indicator();
 			}else {
 				//Si no lo era, compruebo si es una métrica
-				reportItemDefinition=Context.getContext().getChecker().definedMetric(name,value.getClass().getName());
+				reportItemDefinition=Context.getContext().getChecker().getMetricConfiguration().definedMetric(name,value.getClass().getName());
 			}
 			if(reportItemDefinition!=null) {	
 				this.name=name;

@@ -27,7 +27,7 @@ import org.mockito.Mockito;
 import us.muit.fs.a4i.control.IndicatorsCalculator;
 import us.muit.fs.a4i.exceptions.IndicatorException;
 import us.muit.fs.a4i.model.entities.Indicator;
-import us.muit.fs.a4i.model.entities.Metric;
+
 import us.muit.fs.a4i.model.entities.Report;
 import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;
@@ -59,7 +59,7 @@ class ReportTest {
 	@Captor
 	private ArgumentCaptor<String> strCaptor;
 	@Captor
-	private ArgumentCaptor<Metric> metricCaptor;
+	private ArgumentCaptor<ReportItem> reportItemCaptor;
 	@Captor
 	private ArgumentCaptor<Indicator> indicatorCaptor;
 	@Captor
@@ -151,7 +151,7 @@ class ReportTest {
 		// TODO
 		String name="nombre";
 		//Metric metric=new Metric();
-		Metric metric= null;
+		ReportItem metric= null;
 		reportTested=new Report();
 		reportTested.getMetricByName(name);
 		assertEquals(null,reportTested.getMetricByName(name),"No se establece correctamente el buscador del nombre de la métrica");

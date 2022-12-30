@@ -1,0 +1,29 @@
+package us.muit.fs.a4i.config;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @author isa
+ *
+ */
+public interface MetricConfigurationI {
+	/**
+	 * <p>
+	 * Comprueba si la métrica está definida en el fichero por defecto o en el de la
+	 * aplicación cliente
+	 * </p>
+	 * <p>
+	 * También verifica que el tipo es el adecuado
+	 * </p>
+	 * 
+	 * @param metricName nombre de la métrica que se quiere comprobar
+	 * @param metricType tipo de la métrica
+	 * @return metricDefinition Si la métrica está definida y el tipo es correcto se devuelve un mapa con las unidades y la descripción
+	 * @throws FileNotFoundException Si no se localiza el fichero de configuración
+	 */
+	public HashMap<String,String> definedMetric(String name,String type) throws FileNotFoundException;
+
+	List<String> listAllMetrics() throws FileNotFoundException;
+}

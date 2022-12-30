@@ -7,7 +7,7 @@ import java.util.List;
 
 import us.muit.fs.a4i.exceptions.MetricException;
 
-import us.muit.fs.a4i.model.entities.Metric;
+
 import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;
 

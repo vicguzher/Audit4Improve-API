@@ -111,7 +111,7 @@ class ReportItemTest {
 			new ReportItemBuilder<String>("watchers", "hola");
 				}, "Se esperaba la excepciÛn ReportItemException");
 		//verifica tambi√©n que el mensaje es correcto
-		assertEquals("MÈtrica watchers no definida o tipo java.lang.String incorrecto", thrown.getMessage(),"El mensaje de la excepciÛn no es correcto");
+		assertEquals("ReportItem watchers no definido o tipo java.lang.String incorrecto", thrown.getMessage(),"El mensaje de la excepciÛn no es correcto");
 		//El constructor de m√©tricas no permite que se incluyan m√©tricas no definidas
 		// Prueba una m√©trica que no existe
 		try {

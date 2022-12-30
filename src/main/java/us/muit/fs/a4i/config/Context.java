@@ -3,20 +3,16 @@
  */
 package us.muit.fs.a4i.config;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.awt.Font;
 
-import us.muit.fs.a4i.model.entities.Indicator;
 import us.muit.fs.a4i.model.entities.IndicatorI;
-import us.muit.fs.a4i.model.entities.Metric;
+
 
 /**
  * <p>
@@ -69,7 +65,15 @@ public class Context {
 		setProperties();
 		checker = new Checker();
 	}
-
+    public static void setAppRI(String filename) {
+    	appFile=filename;
+    }
+    public static String getAppRI() {
+    	return appFile;
+    }
+    public static String getDefaultRI() {
+    	return defaultFile;
+    }
 	/**
 	 * <p>
 	 * Devuelve la instancia única de Context. Si no estaba creada la crea, leyendo

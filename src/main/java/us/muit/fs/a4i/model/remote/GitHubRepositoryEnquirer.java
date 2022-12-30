@@ -15,8 +15,6 @@ import org.kohsuke.github.GHRepositoryStatistics.CodeFrequency;
 
 import us.muit.fs.a4i.exceptions.MetricException;
 import us.muit.fs.a4i.exceptions.ReportItemException;
-import us.muit.fs.a4i.model.entities.Metric;
-import us.muit.fs.a4i.model.entities.Metric.MetricBuilder;
 import us.muit.fs.a4i.model.entities.Report;
 import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;

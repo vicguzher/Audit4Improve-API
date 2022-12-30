@@ -34,7 +34,7 @@ import org.mockito.Mockito;
 
 import us.muit.fs.a4i.exceptions.MetricException;
 import us.muit.fs.a4i.model.entities.Indicator;
-import us.muit.fs.a4i.model.entities.Metric;
+import us.muit.fs.a4i.model.entities.ReportItem;
 import us.muit.fs.a4i.persistence.ReportFormaterI;
 import us.muit.fs.a4i.model.entities.Indicator;
 import us.muit.fs.a4i.persistence.*; 
@@ -52,14 +52,12 @@ class ExcelReportManagerTest {
 	private ArgumentCaptor<ReportFormaterI> FormaterCaptor;
 	
 	@Mock(serializable = true)
-	private static Metric<Integer> metricIntMock= Mockito.mock(Metric.class);
+	private static ReportItem<Integer> metricIntMock= Mockito.mock(ReportItem.class);
 	@Mock(serializable = true)
-	private static Metric<String> metricStrMock= Mockito.mock(Metric.class);
+	private static ReportItem<String> metricStrMock= Mockito.mock(ReportItem.class);
 	
 	@Test
 	void ExcelCreation() {
 		
 	}
-
-
 }

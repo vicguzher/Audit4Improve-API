@@ -52,10 +52,10 @@ public class ReportManager implements ReportManagerI {
 
 	@Override
 	public void saveReport(ReportI report) {
-		persister.setReport(report);
+		
 		persister.setFormater(formater);
 		try {
-			persister.saveReport();
+			persister.saveReport(report);
 		} catch (ReportNotDefinedException e) {
 			log.info("No debería entrar aquí porque se acaba de establecer el informe");
 			e.printStackTrace();
