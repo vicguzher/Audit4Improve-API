@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import us.muit.fs.a4i.config.Context;
-import us.muit.fs.a4i.model.entities.Indicator;
+
 
 import us.muit.fs.a4i.model.entities.IndicatorI;
 
@@ -70,6 +70,10 @@ public class ReportFormater implements ReportFormaterI {
 	@Override
 	public void setDefaultFont(Font font) {
 		defaultFont=font;
+	}
+	@Override
+	public Font getDefaultFont() {	
+		return this.defaultFont;
 	}
 	
 }

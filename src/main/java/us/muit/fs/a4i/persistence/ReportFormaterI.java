@@ -47,5 +47,9 @@ public interface ReportFormaterI {
 	 * @param font Fuente por defecto
 	 */
 	void setDefaultFont(Font font);
-	
+	/**
+	 * Devuelve la fuente por defecto
+	 * @return Fuente por defecto
+	 */
+	Font getDefaultFont();
 }
