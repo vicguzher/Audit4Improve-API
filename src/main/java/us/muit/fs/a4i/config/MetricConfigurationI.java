@@ -24,6 +24,7 @@ public interface MetricConfigurationI {
 	 * @throws FileNotFoundException Si no se localiza el fichero de configuración
 	 */
 	public HashMap<String,String> definedMetric(String name,String type) throws FileNotFoundException;
+	public HashMap<String,String> getMetricInfo(String name) throws FileNotFoundException;
 
 	List<String> listAllMetrics() throws FileNotFoundException;
 }

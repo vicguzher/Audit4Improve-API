@@ -28,7 +28,7 @@ class MetricInfo {
 	void testGetChecker() {
 		try {
 			Checker checker=Context.getContext().getChecker();
-			HashMap<String,String> metricInfo=checker.getMetricInfo("issues");
+			HashMap<String,String> metricInfo=checker.getMetricConfiguration().getMetricInfo("issues");
 			assertEquals(metricInfo.get("name"),"issues","No se ha leído bien el nombre de la métrica");
 			assertEquals(metricInfo.get("type"),"java.lang.Integer","No se ha leído bien el tipo de la métrica");
 			assertEquals(metricInfo.get("description"),"Tareas sin finalizar en el repositorio","No se ha leído bien la descripción de la métrica");
