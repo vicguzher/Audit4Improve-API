@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import java.awt.Font;
 
 import us.muit.fs.a4i.model.entities.Indicator;
+import us.muit.fs.a4i.model.entities.IndicatorI;
 import us.muit.fs.a4i.model.entities.Metric;
 
 /**
@@ -196,7 +197,7 @@ public class Context {
 	 * @throws IOException problema al leer el fichero
 	 */
 
-	public static Font getIndicatorFont(Indicator.State state) throws IOException {
+	public static Font getIndicatorFont(IndicatorI.IndicatorState state) throws IOException {
 		Font font = null;
 
 		// TO DO

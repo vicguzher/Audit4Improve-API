@@ -6,7 +6,7 @@ package us.muit.fs.a4i.exceptions;
  */
 public class MetricException extends Exception {
 	 /**
-	 * Excepción que indica que se está intentando recuperar una entidad sin haber establecido su id
+	 * Excepción al manejar métrica
 	 */
 	private static final long serialVersionUID = 1L;
 	/**

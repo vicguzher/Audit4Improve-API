@@ -9,7 +9,8 @@ import java.util.HashMap;
 
 import us.muit.fs.a4i.config.Context;
 import us.muit.fs.a4i.model.entities.Indicator;
-import us.muit.fs.a4i.model.entities.Indicator.State;
+
+import us.muit.fs.a4i.model.entities.IndicatorI;
 
 /**
  * @author Isabel Román
@@ -27,10 +28,10 @@ public class ReportFormater implements ReportFormaterI {
 	/**
 	 * Fomatos de fuente en función del estado del indicador
 	 */
-	private HashMap<Indicator.State,Font> indicatorsFont;
+	private HashMap<IndicatorI.IndicatorState,Font> indicatorsFont;
 	
     ReportFormater(){
-    	 	this.indicatorsFont=new HashMap<Indicator.State,Font>();    	 	
+    	 	this.indicatorsFont=new HashMap<IndicatorI.IndicatorState,Font>();    	 	
     	 	//Sólo se construye el mapa, conforme se vayan solicitando se irán rellenando
     }
 	@Override
@@ -48,7 +49,7 @@ public class ReportFormater implements ReportFormaterI {
 	}
 
 	@Override
-	public Font getIndicatorFont(Indicator.State state) throws IOException {	
+	public Font getIndicatorFont(IndicatorI.IndicatorState state) throws IOException {	
 		if (!indicatorsFont.containsKey(state)){
 			try {
 				indicatorsFont.put(state, Context.getIndicatorFont(state));
@@ -61,7 +62,7 @@ public class ReportFormater implements ReportFormaterI {
 	}
 
 	@Override
-	public void setIndicatorFont(State state, Font font) {
+	public void setIndicatorFont(IndicatorI.IndicatorState state, Font font) {
 		indicatorsFont.put(state, font);
 
 	}

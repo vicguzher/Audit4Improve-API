@@ -43,7 +43,7 @@ public class RepositoryCalculator implements IndicatorsCalculator {
     	return indicator;
     }
 	@Override
-	public ReportI.Type getReportType() {
-		return ReportI.Type.REPOSITORY;
+	public ReportI.ReportType getReportType() {
+		return ReportI.ReportType.REPOSITORY;
 	}
 }

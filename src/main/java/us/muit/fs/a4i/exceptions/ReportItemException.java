@@ -4,9 +4,9 @@ package us.muit.fs.a4i.exceptions;
  * @author Isabel Román
  *
  */
-public class IndicatorException extends  Exception {
+public class ReportItemException extends Exception {
 	 /**
-	 * Excepción al manejar Indicador
+	 * Excepción al manejar ReportItem
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -17,7 +17,7 @@ public class IndicatorException extends  Exception {
 	 * <p>Constructor</p>
 	 * @param info Mensaje definiendo el error
 	 */
-	public IndicatorException(String info){
+	public ReportItemException(String info){
 		message=info;
 	}
 

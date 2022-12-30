@@ -14,7 +14,7 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GHRepositoryStatistics.CodeFrequency;
 
 import us.muit.fs.a4i.exceptions.MetricException;
-
+import us.muit.fs.a4i.exceptions.ReportItemException;
 import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.Metric.MetricBuilder;
 import us.muit.fs.a4i.model.entities.Report;
@@ -237,6 +237,9 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ReportItemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return metric;
 
@@ -276,6 +279,9 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 			metric = totalDeletions.build();
 
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ReportItemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

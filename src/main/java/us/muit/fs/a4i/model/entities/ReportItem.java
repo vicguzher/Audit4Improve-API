@@ -13,16 +13,16 @@ import java.util.logging.Logger;
 import java.util.Collection;
 
 import us.muit.fs.a4i.config.Context;
-import us.muit.fs.a4i.exceptions.MetricException;
-import us.muit.fs.a4i.model.entities.Indicator.IndicatorBuilder;
-import us.muit.fs.a4i.model.entities.ReportItemI;
+
+import us.muit.fs.a4i.exceptions.ReportItemException;
+
 /**
  * @author Isabel Román
  * Entidad para guardar la información de un indicador o una métrica, elementos de un informe
  *
  */
 public class ReportItem<T> implements ReportItemI<T>{
-	private Indicator<T> indicator = null;
+	private Indicator indicator = null;
 	private static Logger log=Logger.getLogger(ReportItem.class.getName());
 	/**
 	 * Nombre del indicador/métrica
@@ -115,8 +115,8 @@ public class ReportItem<T> implements ReportItemI<T>{
 	 * Consulta el indicador de ReportItem
 	 * @return indicador de ReportItem
 	 */
-	public Indicator<T> getIndicator() {
-		return indicator;
+	public Indicator getIndicator() {
+		return this.indicator;
 	}
 
 	
@@ -125,7 +125,7 @@ public class ReportItem<T> implements ReportItemI<T>{
 	 * @return Fecha de consulta del ReportItem
 	 */
 	public Date getDate() {
-		return date;
+		return this.date;
 	}
 	
 	/**
@@ -138,11 +138,11 @@ public class ReportItem<T> implements ReportItemI<T>{
 		private Date date;
 		private T value;
 		private String source;
-		private String unit;
-		private Collection<ReportItem> metrics;
-		private ReportItem metric;
-		private IndicatorBuilder state;
-		public ReportItemBuilder(String name, T value) throws MetricException {
+		private String unit;		
+		private Indicator indicator=null;
+		
+	
+		public ReportItemBuilder(String name, T value) throws ReportItemException {
 			HashMap<String,String> reportItemDefinition=null;
 			/**
 			 * Verifico si el elemento está definido y el tipo es correcto
@@ -152,21 +152,30 @@ public class ReportItem<T> implements ReportItemI<T>{
 			//Pero Â¿y si se usan tipos definidos en otras librerÃ­as? usar el nombre completo "desambigua" mejor
 			log.info("Verifico el ReportItem de nombre "+name+" con valor de tipo "+value.getClass().getName());
 			try {
-			reportItemDefinition=Context.getContext().getChecker().definedReportItem(name,value.getClass().getName());
+				//Compruebo si es un indicador
+			reportItemDefinition=Context.getContext().getChecker().definedIndicator(name,value.getClass().getName());
 					
 			if(reportItemDefinition!=null) {				
+				this.indicator=new Indicator();
+			}else {
+				//Si no lo era, compruebo si es una métrica
+				reportItemDefinition=Context.getContext().getChecker().definedMetric(name,value.getClass().getName());
+			}
+			if(reportItemDefinition!=null) {	
 				this.name=name;
 				this.value=value;			
 				this.date=Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 				this.description=reportItemDefinition.get("description");
 				this.unit=reportItemDefinition.get("unit");
 			}else {
-				throw new MetricException("Métrica "+name+" no definida o tipo "+value.getClass().getName()+" incorrecto");
+				throw new ReportItemException("ReportItem "+name+" no definido o tipo "+value.getClass().getName()+" incorrecto");
 			}
 			}catch(IOException e) {
-				throw new MetricException("El fichero de configuración de ReportItem no se puede abrir");
+				throw new ReportItemException("El fichero de configuración de ReportItem no se puede abrir");
 			}
-			
+			/*Si el ReportItem era un indicador este se ha creado vacío, con el campo state a UNDEFINED
+			  Si era una métrica el indicador está null
+			  Si no era ninguno de los dos se ha lanzado una excepción*/   		
 			
 		}
 		/**
@@ -192,26 +201,35 @@ public class ReportItem<T> implements ReportItemI<T>{
 
 
 		/**
-		 * <p>Establece el estado del ReportItem</p>
-		 * @param state Estado del ReportItem
+		 * <p>Establece el estado del ReportItem si era un indicador</p>
+		 * @param state Estado del indicador
 		 * @return El propio constructor
+		 * @throws ReportItemException, intenta establecer datos de tipo indicador en una métrica
 		 */
-		public ReportItemBuilder<T> state(IndicatorBuilder<T> state){
-			this.state=state;
+		public ReportItemBuilder<T> indicator(IndicatorI.IndicatorState state)throws ReportItemException {
+			if(this.indicator!=null) {
+				this.indicator.setState(state);
+				}else {
+					throw new ReportItemException("El Report Item no es un indicador, no puede contener estado"); 
+				}
+				
 			return this;
 		}
-
 
 		/**
-		 * <p>Establece la mÃ©trica del ReportItem</p>
-		 * @param metric MÃ©trica del ReportItem
+		 * <p>Establece el conjunto de métricas si el ReportItem es un indicador</p>
+		 * @param metrics
 		 * @return El propio constructor
+		 * @throws ReportItemException
 		 */
-		public ReportItemBuilder<T> metric(ReportItem<T> metric){
-			this.metric=metric;
+		public ReportItemBuilder<T> metrics(Collection<ReportItem> metrics)throws ReportItemException {
+			if(this.indicator!=null) {
+			this.indicator.setMetrics(metrics);
+			}else {
+				throw new ReportItemException("El Report Item no es un indicador, no puede contener más metricas"); 
+			}
 			return this;
 		}
-
 
 		/**
 		 * <p>Establece la fuente de informaciÃ³n</p>
@@ -238,9 +256,13 @@ public class ReportItem<T> implements ReportItemI<T>{
 	
 	@Override
 	public String toString() {
-		String info;
-		info="ReportItem para "+description+", con valor=" + value + ", source=" + source
+		String info="ReportItem ";
+		if(this.indicator!=null) {
+			info="De tipo Indicador ";
+		}
+		info=info+"para "+description+", con valor=" + value + ", source=" + source
 				+ ", unit=" + unit +" fecha de la medida=  "+ date;
+		
 		return info;
 	}
 	

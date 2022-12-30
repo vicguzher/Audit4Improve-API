@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder;
 
 import us.muit.fs.a4i.exceptions.MetricException;
+import us.muit.fs.a4i.exceptions.ReportItemException;
 import us.muit.fs.a4i.model.entities.ReportItem;
 
 /**
@@ -80,7 +81,7 @@ class ReportItemTest {
 		ReportItemBuilder underTest = null;
 		try {
 			underTest = new ReportItemBuilder<Integer>("watchers", 33);
-		} catch (MetricException e) {
+		} catch (ReportItemException e) {
 			fail("Watchers existe y no deber韆 haber saltado esta excepci髇");
 			e.printStackTrace();
 		}
@@ -99,16 +100,16 @@ class ReportItemTest {
 		try {
 			underTest = new ReportItemBuilder<String>("watchers", "hola");
 			fail("Deber韆 haber lanzado una excepci贸n");
-		} catch (MetricException e) {
-			log.info("Lanza la excepci髇 adecuada, MetricException");
+		} catch (ReportItemException e) {
+			log.info("Lanza la excepci髇 adecuada, ReportItemException");
 
 		} catch (Exception e) {
-			fail("La excepci髇 capturada es " + e + " cuando se esperaba de tipo MetricException");
+			fail("La excepci髇 capturada es " + e + " cuando se esperaba de tipo ReportItemException");
 		}
 		//Forma ALTERNATIVA de verificar el lanzamiento de una excepci贸n, usando la verificaci贸n assertThrows
-		MetricException thrown = assertThrows(MetricException.class, () -> {
+		ReportItemException thrown = assertThrows(ReportItemException.class, () -> {
 			new ReportItemBuilder<String>("watchers", "hola");
-				}, "Se esperaba la excepci髇 MetricException");
+				}, "Se esperaba la excepci髇 ReportItemException");
 		//verifica tambi茅n que el mensaje es correcto
 		assertEquals("M閠rica watchers no definida o tipo java.lang.String incorrecto", thrown.getMessage(),"El mensaje de la excepci髇 no es correcto");
 		//El constructor de m茅tricas no permite que se incluyan m茅tricas no definidas
@@ -116,11 +117,11 @@ class ReportItemTest {
 		try {
 			underTest = new ReportItemBuilder<String>("pepe", "hola");
 			fail("Deber韆 haber lanzado una excepci髇");
-		} catch (MetricException e) {
-			log.info("Lanza la excepci髇 adecuada, MetricException");
+		} catch (ReportItemException e) {
+			log.info("Lanza la excepci髇 adecuada, ReportItemException");
 
 		} catch (Exception e) {
-			fail("La excepci髇 capturada es " + e + " cuando se esperaba de tipo MetricException");
+			fail("La excepci髇 capturada es " + e + " cuando se esperaba de tipo ReportItemException");
 		}
 
 	}
@@ -146,7 +147,7 @@ class ReportItemTest {
 				ReportItemBuilder underTest = null;
 				try {
 					underTest = new ReportItemBuilder<Integer>("watchers", 33);
-				} catch (MetricException e) {
+				} catch (ReportItemException e) {
 					fail("El elemento watchers existe, no deber韆 haber saltado esta excepci贸n");
 					e.printStackTrace();
 				}

@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.io.IOException;
 
 import us.muit.fs.a4i.model.entities.Indicator;
+import us.muit.fs.a4i.model.entities.IndicatorI;
+import us.muit.fs.a4i.model.entities.IndicatorI.IndicatorState;
 
 /**
  * <p>Interfaz genérica para establecer el estilo de los informes si se persisten en un medio "visual"</p>
@@ -32,17 +34,18 @@ public interface ReportFormaterI {
 	 * @throws IOException Si no se puede leer la configuración
 	 */
    
-	Font getIndicatorFont(Indicator.State state) throws IOException;
+	Font getIndicatorFont(IndicatorI.IndicatorState state) throws IOException;
 	/**
 	 * <p>Establece la fuente para un indicador en un estado determinado</p>
 	 * @param state El estado correspondiente a la fuente que se está estableciendo
 	 * @param font La fuente a usar cuando el estado del indicador es el señalado en la parámetro state
 	 */
-	void setIndicatorFont(Indicator.State state, Font font);
+	void setIndicatorFont(IndicatorI.IndicatorState state, Font font);
 	/**
 	 * <p>Establece la fuente por defecto para los indicadores y métricas</p>
 	 * <p>Usada cuando el estado no está diferenciado o no se ha especificado una fuente para las métricas</p>
 	 * @param font Fuente por defecto
 	 */
 	void setDefaultFont(Font font);
+	
 }

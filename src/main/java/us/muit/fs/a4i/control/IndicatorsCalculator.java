@@ -35,5 +35,5 @@ public interface IndicatorsCalculator {
 	 * Devuelve el tipo de informe que maneja esta calculadora de indicadores
 	 * @return El tipo de informes
 	 */
-	public ReportI.Type getReportType();
+	public ReportI.ReportType getReportType();
 }

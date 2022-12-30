@@ -26,9 +26,11 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import us.muit.fs.a4i.control.ReportManagerI;
 import us.muit.fs.a4i.exceptions.ReportNotDefinedException;
 import us.muit.fs.a4i.model.entities.Indicator;
+import us.muit.fs.a4i.model.entities.IndicatorI;
 import us.muit.fs.a4i.model.entities.Metric;
 import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;
+import us.muit.fs.a4i.model.entities.ReportItemI;
 
 
 
@@ -197,7 +199,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 	   
 	   }
 	   
-   private void persistIndicator(Indicator indicator) {
+   private void persistIndicator(ReportItemI indicator) {
 	   log.info("Introduzco indicador en la hoja");
 	   
 	   
@@ -211,9 +213,11 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 	   row.createCell(cellIndex++).setCellValue(indicator.getValue().toString());
 
 	   row.createCell(cellIndex++).setCellValue(indicator.getDescription());
+	   row.createCell(cellIndex++).setCellValue(indicator.getIndicator().getState().toString());
 	
 	   row.createCell(cellIndex).setCellValue(indicator.getDate().toString());
-	   log.info("Indice de celda final"+cellIndex);
+	   
+	   log.info("Indice de celda final "+cellIndex);
 	   
 	   }
 
