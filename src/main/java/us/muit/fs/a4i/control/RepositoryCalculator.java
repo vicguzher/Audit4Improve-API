@@ -5,6 +5,7 @@ package us.muit.fs.a4i.control;
 
 import java.util.logging.Logger;
 
+import us.muit.fs.a4i.exceptions.IndicatorException;
 import us.muit.fs.a4i.model.entities.Indicator;
 
 import us.muit.fs.a4i.model.entities.ReportI;
@@ -18,8 +19,8 @@ import us.muit.fs.a4i.model.entities.ReportI;
 public class RepositoryCalculator implements IndicatorsCalculator {
 	private static Logger log=Logger.getLogger(RepositoryCalculator.class.getName());
 	@Override
-	public void calcIndicator(String name, ReportI report) {
-		log.info("Calcula el indicador de nombre "+name);
+	public void calcIndicator(String indicatorName, ReportManagerI reportManager) throws IndicatorException{
+		log.info("Calcula el indicador de nombre "+indicatorName);
 		/**
 		 * Tiene que mirar si están ya las métricas que necesita
 		 * Si están lo calcula
@@ -34,7 +35,7 @@ public class RepositoryCalculator implements IndicatorsCalculator {
  * 
  */
 	@Override
-	public void calcAllIndicators(ReportI report) {
+	public void calcAllIndicators(ReportManagerI reportManager) throws IndicatorException{
 		log.info("Calcula todos los indicadores del repositorio y los incluye en el informe");
 	}
     private Indicator commitsPerUser(ReportI report) {
@@ -46,4 +47,6 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 	public ReportI.ReportType getReportType() {
 		return ReportI.ReportType.REPOSITORY;
 	}
+	
+	
 }

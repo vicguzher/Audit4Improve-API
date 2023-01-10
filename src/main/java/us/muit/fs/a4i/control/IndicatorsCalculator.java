@@ -23,13 +23,13 @@ public interface IndicatorsCalculator {
 	 * @throws IndicatorException Si el indicador no está definido en la calculadora
 	 */
 	
-	public void calcIndicator(String name,ReportI report) throws IndicatorException;
+	public void calcIndicator(String indicatorName,ReportManagerI reportManager) throws IndicatorException;
 	/**
 	 * <p>Calcula todos los indicadores configurados para el tipo de informe que se pasa. Debe verificar primero que el tipo de informe que se pasa es correcto</p>
 	 * @param report Informe sobre el que realizar el cálculo
 	 * @throws IndicatorException Si el tipo del informe no coincide con el de la calculadora
 	 */
-	public void calcAllIndicators(ReportI report) throws IndicatorException;
+	public void calcAllIndicators(ReportManagerI reportManager) throws IndicatorException;
 	
 	/**
 	 * Devuelve el tipo de informe que maneja esta calculadora de indicadores

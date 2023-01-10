@@ -31,6 +31,7 @@ import us.muit.fs.a4i.model.entities.Indicator;
 import us.muit.fs.a4i.model.entities.Report;
 import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;
+import us.muit.fs.a4i.model.entities.ReportItemI;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -185,7 +186,7 @@ class ReportTest {
 		//Prueba a sustituir por la línea comentada
 		Mockito.verify(metricIntMock,atLeast(1)).getName();
 		//Mockito.verify(metricIntMock, atLeast(1)).getName();
-		ReportItem metric=reportTested.getMetricByName("issues");
+		ReportItemI metric=reportTested.getMetricByName("issues");
 		assertEquals(metric.getValue(),3,"Deberíaa tener el valor especificado en el mock");
 		assertEquals(metric.getDescription(),"Tareas sin finalizar en el repositorio","Debería tener el valor especificado en el mock");
 
@@ -237,7 +238,7 @@ class ReportTest {
 			//Prueba a sustituir por la lÃ­nea comentada
 			Mockito.verify(indicatorIntMock).getName();
 			//Mockito.verify(metricIntMock, atLeast(1)).getName();
-			ReportItem indicator=reportTested.getIndicatorByName("issues");
+			ReportItemI indicator=reportTested.getIndicatorByName("issues");
 			assertEquals(indicator.getValue(),3,"DeberÃ­a tener el valor especificado en el mock");
 			assertEquals(indicator.getDescription(),"Tareas sin finalizar en el repositorio","DeberÃ­a tener el valor especificado en el mock");
 			
@@ -396,7 +397,7 @@ class ReportTest {
 	@Test
 	@Tag("noacabado")
 	void testGetAllMetrics() {
-		ReportItem metric= null;
+		ReportItemI metric= null;
 		reportTested=new Report();
 
 		try {
@@ -424,7 +425,7 @@ class ReportTest {
 	@Test
 	@Tag("noacabado")
 	void testGetAllIndicators() {
-		ReportItem indicator= null;
+		ReportItemI indicator= null;
 				reportTested=new Report();
 
 				try {

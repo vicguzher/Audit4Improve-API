@@ -163,8 +163,8 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
     		    rowIndex++;
     			sheet.createRow(rowIndex).createCell(0).setCellValue("Métricas tomadas el día ");
     			sheet.getRow(rowIndex).createCell(1).setCellValue(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)).toString());
-    			Collection<ReportItem> collection=report.getAllMetrics();
-    			for(ReportItem metric:collection) {
+    			Collection<ReportItemI> collection=report.getAllMetrics();
+    			for(ReportItemI metric:collection) {
     				persistMetric(metric);
     			}
     
@@ -240,8 +240,9 @@ public class ExcelReportManager implements PersistenceManager, FileManager{
 	   
 	   }
 
+	
 	@Override
-	public void deleteReport() throws ReportNotDefinedException {
+	public void deleteReport(ReportI report) throws ReportNotDefinedException {
 		// TODO Auto-generated method stub
 		
 	}    	 

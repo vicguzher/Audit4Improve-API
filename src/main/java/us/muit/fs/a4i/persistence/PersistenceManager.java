@@ -7,7 +7,7 @@ import us.muit.fs.a4i.model.remote.RemoteEnquirer;
 
 /**
  * <p>Interfaz de los gestores de persistencia</p>
- * @author isa
+ * @author Isabel Román
  *
  */
 public interface PersistenceManager {
@@ -21,14 +21,14 @@ public interface PersistenceManager {
 	
 	/**
 	 * <p>Persiste el informe</p>
-	 * @throws ReportNotDefinedException Si no se estableció el informe lanzará error
+	 * @throws ReportNotDefinedException, si el informe es nulo dará error
 	 */
 	void saveReport(ReportI report) throws ReportNotDefinedException;
 	/**
 	 * <p>Borra el informe</p>
 	 * 
-	 * @throws ReportNotDefinedException Si no se estableció el informe dará error
+	 * @throws ReportNotDefinedException,si el informe es nulo dará error
 	 */
-	void deleteReport()throws ReportNotDefinedException;
+	void deleteReport(ReportI report)throws ReportNotDefinedException;
 	
 }

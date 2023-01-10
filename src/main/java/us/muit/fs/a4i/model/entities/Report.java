@@ -36,17 +36,17 @@ public class Report implements ReportI {
 	
 	private ReportI.ReportType type=null;
 	/**
-	 * Mapa de Mï¿½tricas
+	 * Mapa de Métricas
 	 * 
 	 * */
 	 
-	private HashMap<String,ReportItem> metrics;
+	private HashMap<String,ReportItemI> metrics;
 	
 	/**
 	 * Mapa de indicadores
 	 */
 		
-	private HashMap<String,ReportItem> indicators;
+	private HashMap<String,ReportItemI> indicators;
 	
 	public Report(){
 		createMaps();
@@ -66,8 +66,8 @@ public class Report implements ReportI {
 		this.entityId=entityId;		
 	}	
 	private void createMaps() {
-		metrics=new HashMap<String,ReportItem>();
-		indicators=new HashMap<String,ReportItem>();
+		metrics=new HashMap<String,ReportItemI>();
+		indicators=new HashMap<String,ReportItemI>();
 	}
 	/**
 	 * <p>Busca la mï¿½trica solicita en el informe y la devuelve</p>
@@ -75,9 +75,9 @@ public class Report implements ReportI {
 	 * @param name Nombre de la mï¿½trica buscada
 	 * @return la mï¿½trica localizada
 	 */
-	public ReportItem getMetricByName(String name) {
+	public ReportItemI getMetricByName(String name) {
 		log.info("solicitada métrica de nombre "+name);
-		ReportItem metric=null;
+		ReportItemI metric=null;
 		
 		if (metrics.containsKey(name)){
 			log.info("La mï¿½trica estï¿½ en el informe");
@@ -90,7 +90,7 @@ public class Report implements ReportI {
 	 */
 
 	@Override
-	public void addMetric(ReportItem met) {		
+	public void addMetric(ReportItemI met) {		
 		metrics.put(met.getName(), met);
 		log.info("Aï¿½adida mï¿½trica "+met+" Con nombre "+met.getName());
 	}
@@ -101,9 +101,9 @@ public class Report implements ReportI {
 	 * @return el indicador localizado
 	 */
 	@Override
-	public ReportItem getIndicatorByName(String name) {
+	public ReportItemI getIndicatorByName(String name) {
 		log.info("solicitado indicador de nombre "+name);
-		ReportItem indicator=null;
+		ReportItemI indicator=null;
 		
 		if (indicators.containsKey(name)){
 			indicator=indicators.get(name);
@@ -115,7 +115,7 @@ public class Report implements ReportI {
  * 
  */ 
 	@Override
-	public void addIndicator(ReportItem ind) {
+	public void addIndicator(ReportItemI ind) {
 		
 		indicators.put(ind.getName(), ind);
 		log.info("Aï¿½adido indicador "+ind);
@@ -142,13 +142,13 @@ public class Report implements ReportI {
 		return repoinfo;
 	}
 	@Override
-	public Collection<ReportItem> getAllMetrics() {
+	public Collection<ReportItemI> getAllMetrics() {
 		// TODO Auto-generated method stub
 		return metrics.values();
 	}
 	
 	@Override
-	public Collection<ReportItem> getAllIndicators() {
+	public Collection<ReportItemI> getAllIndicators() {
 		// TODO Auto-generated method stub
 		return indicators.values();
 	}

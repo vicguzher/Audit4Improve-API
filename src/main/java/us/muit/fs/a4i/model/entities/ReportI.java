@@ -34,17 +34,17 @@ public interface ReportI {
 	 * @param name Nombre de la métrica solicitada
 	 * @return Métrica solicitada
 	 */
-	ReportItem getMetricByName(String name);
+	ReportItemI getMetricByName(String name);
 	/**
 	 * Obtiene todas las métricas del informe
 	 * @return Colleción de métricas que contiene el informe
 	 */
-	Collection<ReportItem> getAllMetrics();
+	Collection<ReportItemI> getAllMetrics();
     /**
      * Añade una métrica al informe
      * @param met Nueva métrica
      */
-	void addMetric(ReportItem met);
+	void addMetric(ReportItemI metric);
 
 	/**
 	 * Obtiene un indicador del informe a partir del nombre del mismo
@@ -52,12 +52,12 @@ public interface ReportI {
 	 * @return El indicador
 	 */
 
-	ReportItem getIndicatorByName(String name);
+	ReportItemI getIndicatorByName(String indicatorName);
 	/**
 	 * Obtiene todos los indicadores del informe
 	 * @return el conjunto de indicadores del informe
 	 */
-	Collection<ReportItem> getAllIndicators();
+	Collection<ReportItemI> getAllIndicators();
 
 	/**
 	 * Añade un indicador al informe
@@ -65,7 +65,7 @@ public interface ReportI {
 	 */
 
 
-	void addIndicator(ReportItem ind);
+	void addIndicator(ReportItemI newIndicator);
 
 	/**
 	 * Calcula un indicador a partir de su nombre y lo aï¿½ade al informe
