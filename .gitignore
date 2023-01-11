@@ -43,4 +43,3 @@ gradle.properties
 *.rar
 /test.xls
 
-javadoc.xml
