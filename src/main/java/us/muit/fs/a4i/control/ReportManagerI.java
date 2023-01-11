@@ -20,6 +20,7 @@ import us.muit.fs.a4i.persistence.ReportFormaterI;
  * @author Isabel Román
  *
  */
+
 public interface ReportManagerI {
     
     /**
@@ -41,10 +42,13 @@ public interface ReportManagerI {
 	/**
 	 * <p>Crea un informe para la entidad indicada como parámetro, según las reglas del RemoteBuilder Establecido</p>
 	 * <p>El id debe identificar unívocamente a la entidad en el remoto</p>
-	 * @param id Identificador de la entidad a la que se refiere el informe
+	 * @param entityId Identificador de la entidad a la que se refiere el informe
+	 * @param reportType El tipo de informe
 	 * @return el informe creado
+	 * @throws Exception el tipo de informe no coincide con el del manager
 	 */
-	public ReportI newReport(String entityId);	
+	public ReportI newReport(String entityId, ReportI.ReportType reportType) throws Exception;
+	
 	
 		
 }

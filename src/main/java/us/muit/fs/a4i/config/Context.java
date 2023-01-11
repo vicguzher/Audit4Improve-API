@@ -63,7 +63,9 @@ public class Context {
 
 	private Context() throws IOException {
 		setProperties();
+		log.info("Propiedades del contexto establecidas");
 		checker = new Checker();
+		log.info("Checker creado");
 	}
     public static void setAppRI(String filename) {
     	appFile=filename;
@@ -144,6 +146,7 @@ public class Context {
 	 * @throws IOException si hay problemas al consultar las propiedades
 	 */
 	public String getRemoteType() throws IOException {
+		log.info("Se solicita el tipo de remoto");
 		return properties.getProperty("remote.type");
 	}
 
@@ -241,7 +244,7 @@ public class Context {
 		InputStream is=this.getClass().getResourceAsStream(filePath);
 		log.info("InputStream "+is+" para "+filePath);			
 		properties.load(is);		
-		log.fine("Listado de propiedades "+properties);
+		log.info("Listado de propiedades "+properties);
 
 	}
 

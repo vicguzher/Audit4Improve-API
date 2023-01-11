@@ -24,7 +24,7 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 		/**
 		 * Tiene que mirar si están ya las métricas que necesita
 		 * Si están lo calcula
-		 * Si no están busca las métricas, las añade y lo calcula
+		 * Si no están busca las métricas, las añade al informe y lo calcula
 		 * 
 		 */
 		

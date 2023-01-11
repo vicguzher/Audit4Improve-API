@@ -61,8 +61,11 @@ public class SupervisorControl {
             GHOrganization unaOrg = github.getOrganization("MIT-FS");
           //  PagedIterable<GHRepository> repos=unaOrg.listRepositories();
         	System.out.println("Recupero la organización "+unaOrg.getId());
+        	
+        	
         	GHRepository githubrepo=github.getRepository("hub4j/github-api");
         	System.out.println("Este repositorio es de "+githubrepo.getOwnerName()+" Y su descripción es "+githubrepo.getDescription());
+        	
         	GHRepositoryStatistics estadisticas=githubrepo.getStatistics();
         	log.info("Estadisticas recogidas");
         	  	
@@ -94,6 +97,7 @@ public class SupervisorControl {
 		}catch(Exception e) {
 				log.info(e+" No se puede crear la instancia GitHub\n");
 				log.info("Recuerde que debe configurar las variables de entorno GITHUB_LOGIN y GITHUB_OAUTH con su nombre de usuario y token respectivamente");
+				e.printStackTrace();
 			}
 		}
 

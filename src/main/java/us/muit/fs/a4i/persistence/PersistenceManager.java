@@ -11,8 +11,11 @@ import us.muit.fs.a4i.model.remote.RemoteEnquirer;
  *
  */
 public interface PersistenceManager {
-
-	
+ 
+	public static enum PersistenceType{
+    	EXCEL,
+    	DDBB
+    }
 	/**
 	 * <p>Establece el elemento que establece el formato</p>
 	 * @param formater Elemento que maneja las características de formato

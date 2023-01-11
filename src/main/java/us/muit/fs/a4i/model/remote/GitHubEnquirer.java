@@ -41,15 +41,14 @@ public abstract class GitHubEnquirer implements RemoteEnquirer {
 	 */
 	protected GitHub getConnection() {
 		
-		if(github==null) try {
-	
-			   log.info("Creando el objeto GitHub");
+		if(github==null) try {			   
 		       github = GitHubBuilder.fromEnvironment().build();
-	
+		       log.info("Creado el objeto GitHub");	
 		
 		}catch(Exception e) {
 		log.info(e+" No se puede crear la instancia GitHub\n");
 		log.info("Recuerde que debe configurar las variables de entorno GITHUB_LOGIN y GITHUB_OAUTH con su nombre de usuario y token respectivamente");
+		e.printStackTrace();
 	}	
 		return github;
 	}

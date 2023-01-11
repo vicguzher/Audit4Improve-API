@@ -35,6 +35,7 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 		metricNames.add("subscribers");
 		metricNames.add("forks");
 		metricNames.add("watchers");
+		log.info("Añadidas métricas al GHRepositoryEnquirer");
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class GitHubRepositoryEnquirer extends GitHubEnquirer {
 
 			GitHub gb = getConnection();
 			remoteRepo = gb.getRepository(repositoryId);
+			log.info("El repositorio es de "+remoteRepo.getOwnerName()+" Y su descripción es "+remoteRepo.getDescription());
 			log.info("leído " + remoteRepo);
 			myRepo = new Report(repositoryId);
 

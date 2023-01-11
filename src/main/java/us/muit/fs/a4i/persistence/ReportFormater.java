@@ -30,7 +30,7 @@ public class ReportFormater implements ReportFormaterI {
 	 */
 	private HashMap<IndicatorI.IndicatorState,Font> indicatorsFont;
 	
-    ReportFormater(){
+    public ReportFormater(){
     	 	this.indicatorsFont=new HashMap<IndicatorI.IndicatorState,Font>();    	 	
     	 	//Sólo se construye el mapa, conforme se vayan solicitando se irán rellenando
     }
