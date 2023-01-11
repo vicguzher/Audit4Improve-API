@@ -48,19 +48,23 @@ publishing {
        
     }
 }
-version = '0.0'
+version = '0.2'
 tasks.withType(JavaCompile) {
     //Añadir la opción Xlint
     options.deprecation = true
-    options.encoding = 'ISO-8859-1'
+  //  options.encoding = 'ISO-8859-1'
+    options.encoding = 'UTF-8'
 }
 
 tasks.withType(Javadoc){
   
     description = "Genera la documentación"
     //indicar que la codificación es ISO
-    options.encoding = 'ISO-8859-1'
-    options.charSet = 'ISO-8859-1'
+  
+  //  options.encoding = 'ISO-8859-1'
+  //  options.charSet = 'ISO-8859-1'
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
     options.author = true
     options.version = true
     options.use = true

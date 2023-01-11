@@ -3,7 +3,8 @@
  */
 package us.muit.fs.a4i.test.config;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -17,11 +18,12 @@ import org.junit.jupiter.api.Test;
 import us.muit.fs.a4i.config.Context;
 
 /**
- * @author Isabel Román
+ * @author Isabel Romï¿½n
  *
  */
 class ContextTest {
 	private static Logger log = Logger.getLogger(CheckerTest.class.getName());
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -59,7 +61,8 @@ class ContextTest {
 	}
 
 	/**
-	 * Test method for {@link us.muit.fs.a4i.config.Context#setAppConf(java.lang.String)}.
+	 * Test method for
+	 * {@link us.muit.fs.a4i.config.Context#setAppConf(java.lang.String)}.
 	 */
 	@Test
 	void testSetAppConf() {
@@ -79,12 +82,13 @@ class ContextTest {
 	 */
 	@Test
 	void testGetPersistenceType() {
-		try {					
-			assertEquals("excel",Context.getContext().getPersistenceType(),"Debería estar definido el tipo excel por defecto en a4i.conf");
+		try {
+			assertEquals("excel", Context.getContext().getPersistenceType(),
+					"Deberï¿½a estar definido el tipo excel por defecto en a4i.conf");
 		} catch (IOException e) {
 			fail("El fichero no se localiza");
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	/**
@@ -93,11 +97,12 @@ class ContextTest {
 	@Test
 	void testGetRemoteType() {
 		try {
-			assertEquals("github",Context.getContext().getRemoteType(),"Debería estar definido el tipo github por defecto en a4i.conf");
+			assertEquals("github", Context.getContext().getRemoteType(),
+					"Deberï¿½a estar definido el tipo github por defecto en a4i.conf");
 		} catch (IOException e) {
 			fail("El fichero no se localiza");
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	/**
@@ -117,7 +122,8 @@ class ContextTest {
 	}
 
 	/**
-	 * Test method for {@link us.muit.fs.a4i.config.Context#getIndicatorFont(us.muit.fs.a4i.model.entities.Indicator.State)}.
+	 * Test method for
+	 * {@link us.muit.fs.a4i.config.Context#getIndicatorFont(us.muit.fs.a4i.model.entities.Indicator.State)}.
 	 */
 	@Test
 	void testGetIndicatorFont() {

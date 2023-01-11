@@ -3,55 +3,54 @@ package us.muit.fs.a4i.model.entities;
 import java.util.Date;
 
 public interface ReportItemI<T> {
-	
-	
+
 	/**
-	 * Consulta el nombre de la métrica
-	 * @return Nombre de la métrica
+	 * Consulta el nombre de la mÃ©trica
+	 * 
+	 * @return Nombre de la mÃ©trica
 	 */
 	public String getName();
-	
+
 	/**
-	 * Consulta el valor de la métrica
+	 * Consulta el valor de la mÃ©trica
+	 * 
 	 * @return Medida
 	 */
 	public T getValue();
-	
+
 	/**
-	 * Consulta cuando se obtuvo la métrica
-	 * @return Fecha de consulta de la métrica
+	 * Consulta cuando se obtuvo la mÃ©trica
+	 * 
+	 * @return Fecha de consulta de la mÃ©trica
 	 */
 	public Date getDate();
-	
+
 	/**
-	 * Obtiene la descripción de la métrica
-	 * @return Descripción del significado de la métrica
+	 * Obtiene la descripciÃ³n de la mÃ©trica
+	 * 
+	 * @return DescripciÃ³n del significado de la mÃ©trica
 	 */
 	public String getDescription();
-	
+
 	/**
-	 * Consulta la fuente de información
+	 * Consulta la fuente de informaciÃ³n
+	 * 
 	 * @return Origen de la medida
 	 */
 	public String getSource();
-	
+
 	/**
 	 * Consulta las unidades de medida
+	 * 
 	 * @return la unidad usada en la medida
 	 */
 	public String getUnit();
-	
-	/** 
+
+	/**
 	 * Consulta el indicador
+	 * 
 	 * @return el indicador
 	 */
-	public Indicator getIndicator();
-	
-	// getIndicator no existe, no sabemos si hay que crearla o como
-	
-	/***
-	 * Establece la fuente de la información para la medida
-	 * @param source fuente de información origen
-	 */
-	public void setSource(String source);
+	public IndicatorI getIndicator();
+
 }

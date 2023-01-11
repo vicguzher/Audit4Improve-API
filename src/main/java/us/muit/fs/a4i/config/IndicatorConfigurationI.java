@@ -11,15 +11,20 @@ import us.muit.fs.a4i.model.entities.IndicatorI;
 import us.muit.fs.a4i.model.entities.ReportItemI;
 
 /**
- * @author isa
+ * @author Isabel Román
  *
  */
 public interface IndicatorConfigurationI {
-	public HashMap<String,String> definedIndicator(String name,String type) throws FileNotFoundException;
-	
+	public HashMap<String, String> definedIndicator(String name, String type) throws FileNotFoundException;
+
 	public List<String> listAllIndicators() throws FileNotFoundException;
+
 	/**
-	 * Infiere el estado del indicador a partir del valor del ReportItem y de la configuraci�n de estados en el fichero
+	 * <p>
+	 * Infiere el estado del indicador a partir del valor del ReportItem y de la
+	 * configuración de estados en el fichero
+	 * </p>
+	 * 
 	 * @param indicator
 	 * @return El estado del indicador
 	 */

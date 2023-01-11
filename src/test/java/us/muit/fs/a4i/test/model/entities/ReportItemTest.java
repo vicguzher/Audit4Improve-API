@@ -3,7 +3,10 @@
  */
 package us.muit.fs.a4i.test.model.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -18,110 +21,119 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder;
-
-import us.muit.fs.a4i.exceptions.MetricException;
 import us.muit.fs.a4i.exceptions.ReportItemException;
 import us.muit.fs.a4i.model.entities.ReportItem;
+import us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder;
 
 /**
  * <p>
  * Test para probar el constructor de objetos de tipo ReportItem
  * </p>
  * 
- * @author Isabel Román
+ * @author Isabel Romï¿½n
  *
  */
 class ReportItemTest {
 	private static Logger log = Logger.getLogger(ReportItemTest.class.getName());
 
 	/**
-	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente los tests con eclipse
+	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente
+	 *                             los tests con eclipse
 	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		//Acciones a realizar antes de ejecutar los tests de esta clase
+		// Acciones a realizar antes de ejecutar los tests de esta clase
 	}
 
 	/**
-	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente los tests con eclipse
+	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente
+	 *                             los tests con eclipse
 	 */
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		//Acciones a realizar despuÃ©s de ejecutar todos los tests de esta clase
+		// Acciones a realizar despuÃ©s de ejecutar todos los tests de esta clase
 	}
 
 	/**
-	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente los tests con eclipse
+	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente
+	 *                             los tests con eclipse
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		//Acciones a realizar antes de cada uno de los tests de esta clase
+		// Acciones a realizar antes de cada uno de los tests de esta clase
 	}
 
 	/**
-	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente los tests con eclipse
+	 * @throws java.lang.Exception Se incluye por defecto al crear automÃ¡ticamente
+	 *                             los tests con eclipse
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
-		//Acciones a realizar despuÃ©s de cada uno de los tests de esta clase
+		// Acciones a realizar despuÃ©s de cada uno de los tests de esta clase
 	}
 
 	/**
-	 * Test para el constructor Test de ReportItemBuilder: 
+	 * Test para el constructor Test de ReportItemBuilder:
 	 * {@link us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder#ReportItemBuilder(java.lang.String, java.lang.Object)}.
+	 * 
 	 * @see org.junit.jupiter.api.Test
 	 */
 	@Test
 	@Tag("unidad")
-	@DisplayName("Prueba constructor reportItem, las clases Context y Checker ya están disponibles")
+	@DisplayName("Prueba constructor reportItem, las clases Context y Checker ya estï¿½n disponibles")
 	void testReportItemBuilder() {
-		
-		//Comenzamos probando el caso mÃ¡s sencillo, la mÃ©trica existe y el tipo es correcto
+
+		// Comenzamos probando el caso mÃ¡s sencillo, la mÃ©trica existe y el tipo es
+		// correcto
 		ReportItemBuilder underTest = null;
 		try {
 			underTest = new ReportItemBuilder<Integer>("watchers", 33);
 		} catch (ReportItemException e) {
-			fail("Watchers existe y no debería haber saltado esta excepción");
+			fail("Watchers existe y no deberï¿½a haber saltado esta excepciï¿½n");
 			e.printStackTrace();
 		}
 		ReportItem newMetric = underTest.build();
-		log.info("Métrica creada "+newMetric.toString());
+		log.info("Mï¿½trica creada " + newMetric.toString());
 		assertEquals("watchers", newMetric.getName(), "El nombre establecido no es correcto");
 		assertEquals(33, newMetric.getValue(), "El valor establecido no es correcto");
 		assertEquals(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)).toString(),
 				newMetric.getDate().toString(), "La fecha establecida no es correcta");
-		assertEquals(newMetric.getDescription(), "Observadores, en la web aparece com forks","La descripción no coincide con la del fichero de configuración");
-		assertNull(newMetric.getSource(), "El origen no debería estar incluido");
-		assertEquals(newMetric.getUnit(),"watchers", "No debería incluir las unidades");
-		
-		// A continuaciÃ³n se prueba que se hace verificaciÃ³n correcta del tipo de mÃ©trica
-		// Prueba un tipo que no se corresponde con el definido por la mÃ©trica, tiene que lanzar la excepciÃ³n MetricException
+		assertEquals(newMetric.getDescription(), "Observadores, en la web aparece com forks",
+				"La descripciï¿½n no coincide con la del fichero de configuraciï¿½n");
+		assertNull(newMetric.getSource(), "El origen no deberï¿½a estar incluido");
+		assertEquals(newMetric.getUnit(), "watchers", "No deberï¿½a incluir las unidades");
+
+		// A continuaciÃ³n se prueba que se hace verificaciÃ³n correcta del tipo de
+		// mÃ©trica
+		// Prueba un tipo que no se corresponde con el definido por la mÃ©trica, tiene
+		// que lanzar la excepciÃ³n MetricException
 		try {
 			underTest = new ReportItemBuilder<String>("watchers", "hola");
-			fail("Debería haber lanzado una excepciÃ³n");
+			fail("Deberï¿½a haber lanzado una excepciÃ³n");
 		} catch (ReportItemException e) {
-			log.info("Lanza la excepción adecuada, ReportItemException");
+			log.info("Lanza la excepciï¿½n adecuada, ReportItemException");
 
 		} catch (Exception e) {
-			fail("La excepción capturada es " + e + " cuando se esperaba de tipo ReportItemException");
+			fail("La excepciï¿½n capturada es " + e + " cuando se esperaba de tipo ReportItemException");
 		}
-		//Forma ALTERNATIVA de verificar el lanzamiento de una excepciÃ³n, usando la verificaciÃ³n assertThrows
+		// Forma ALTERNATIVA de verificar el lanzamiento de una excepciÃ³n, usando la
+		// verificaciÃ³n assertThrows
 		ReportItemException thrown = assertThrows(ReportItemException.class, () -> {
 			new ReportItemBuilder<String>("watchers", "hola");
-				}, "Se esperaba la excepción ReportItemException");
-		//verifica tambiÃ©n que el mensaje es correcto
-		assertEquals("ReportItem watchers no definido o tipo java.lang.String incorrecto", thrown.getMessage(),"El mensaje de la excepción no es correcto");
-		//El constructor de mÃ©tricas no permite que se incluyan mÃ©tricas no definidas
+		}, "Se esperaba la excepciï¿½n ReportItemException");
+		// verifica tambiÃ©n que el mensaje es correcto
+		assertEquals("ReportItem watchers no definido o tipo java.lang.String incorrecto", thrown.getMessage(),
+				"El mensaje de la excepciï¿½n no es correcto");
+		// El constructor de mÃ©tricas no permite que se incluyan mÃ©tricas no definidas
 		// Prueba una mÃ©trica que no existe
 		try {
 			underTest = new ReportItemBuilder<String>("pepe", "hola");
-			fail("Debería haber lanzado una excepción");
+			fail("Deberï¿½a haber lanzado una excepciï¿½n");
 		} catch (ReportItemException e) {
-			log.info("Lanza la excepción adecuada, ReportItemException");
+			log.info("Lanza la excepciï¿½n adecuada, ReportItemException");
 
 		} catch (Exception e) {
-			fail("La excepción capturada es " + e + " cuando se esperaba de tipo ReportItemException");
+			fail("La excepciï¿½n capturada es " + e + " cuando se esperaba de tipo ReportItemException");
 		}
 
 	}
@@ -140,22 +152,23 @@ class ReportItemTest {
 	 * {@link us.muit.fs.a4i.model.entities.ReportItem.ReportItemBuilder#source(java.lang.String)}.
 	 */
 	@Test
-	@Tag("integración")
-	@DisplayName("Prueba establecer fuente en constructor, las clases Context y Checker ya están disponibles")
+	@Tag("integraciï¿½n")
+	@DisplayName("Prueba establecer fuente en constructor, las clases Context y Checker ya estï¿½n disponibles")
 	void testSource() {
-		//Verificamos que si se establece una fuente en el constructor la mÃ©trica creada especifica esa fuente
-				ReportItemBuilder underTest = null;
-				try {
-					underTest = new ReportItemBuilder<Integer>("watchers", 33);
-				} catch (ReportItemException e) {
-					fail("El elemento watchers existe, no debería haber saltado esta excepciÃ³n");
-					e.printStackTrace();
-				}
-				underTest.source("GitHub");
-				ReportItem newMetric = underTest.build();
-				log.info("Métrica creada: "+newMetric.toString());			
-				assertEquals("GitHub",newMetric.getSource(),"Source no tiene el valor esperado");
-			
+		// Verificamos que si se establece una fuente en el constructor la mÃ©trica
+		// creada especifica esa fuente
+		ReportItemBuilder underTest = null;
+		try {
+			underTest = new ReportItemBuilder<Integer>("watchers", 33);
+		} catch (ReportItemException e) {
+			fail("El elemento watchers existe, no deberï¿½a haber saltado esta excepciÃ³n");
+			e.printStackTrace();
+		}
+		underTest.source("GitHub");
+		ReportItem newMetric = underTest.build();
+		log.info("Mï¿½trica creada: " + newMetric.toString());
+		assertEquals("GitHub", newMetric.getSource(), "Source no tiene el valor esperado");
+
 	}
 
 	/**
@@ -166,6 +179,5 @@ class ReportItemTest {
 	void testUnit() {
 		fail("Not yet implemented"); // TODO
 	}
-	
 
 }

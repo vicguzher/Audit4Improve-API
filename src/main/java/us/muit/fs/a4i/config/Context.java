@@ -3,44 +3,41 @@
  */
 package us.muit.fs.a4i.config;
 
+import java.awt.Font;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
-import java.awt.Font;
 
 import us.muit.fs.a4i.model.entities.IndicatorI;
 
-
 /**
  * <p>
- * Clase para la gestión de los parámetros de contexto
+ * Clase para la gestiÃ³n de los parÃ¡metros de contexto
  * </p>
  * <p>
- * El objetivo de Context es el manejo de la configuración
+ * El objetivo de Context es el manejo de la configuraciÃ³n
  * </p>
  * <p>
- * En el estado actual Contexto sólo es una aproximación a las posiblidades de
- * configuración. Se presentan posibilidades para:
+ * En el estado actual Contexto sÃ³lo es una aproximaciÃ³n a las posiblidades de
+ * configuraciÃ³n. Se presentan posibilidades para:
  * </p>
  * <ul>
- * <li>Localizar el fichero en la carpeta resources, incluida en
- * el jar</li>
+ * <li>Localizar el fichero en la carpeta resources, incluida en el jar</li>
  * <li>Localizar el fichero en el home de usuario</li>
- * <li>Localizar el fichero en una ruta introducida de forma
- * "programada"</li>
+ * <li>Localizar el fichero en una ruta introducida de forma "programada"</li>
  * </ul>
  * <p>
- * Único punto para acceso a variables que pueden ser leídas por cualquiera,
- * configuradas sólo por la clase context
+ * Ãšnico punto para acceso a variables que pueden ser leÃ­das por cualquiera,
+ * configuradas sÃ³lo por la clase context
  * </p>
  * <p>
- * Sigue el patrón singleton
+ * Sigue el patrÃ³n singleton
  * </p>
  * 
- * @author Isabel Román
+ * @author Isabel RomÃ¡n
  *
  */
 public class Context {
@@ -51,13 +48,13 @@ public class Context {
 	private Properties properties = null;
 	// Fichero de propiedades de la API, embebido en el jar
 	private static String confFile = "a4i.conf";
-	// Fichero de propiedades de la API establecido por la aplicación cliente
+	// Fichero de propiedades de la API establecido por la aplicaciÂ´pn cliente
 	private static String appConFile = null;
-	// Fichero de configuración de métricas e indicadores por defecto, embebido en
+	// Fichero de configuraciÃ³n de mÃ©tricas e indicadores por defecto, embebido en
 	// el jar
 	private static String defaultFile = "a4iDefault.json";
-	// Fichero de configuración de métricas e indicadores establecido por la
-	// aplicación cliente
+	// Fichero de configuraciÃ³n de mÃ©tricas e indicadores establecido por la
+	// aplicaciÃ³n cliente
 	private static String appFile = null;
 	private Checker checker = null;
 
@@ -67,28 +64,32 @@ public class Context {
 		checker = new Checker();
 		log.info("Checker creado");
 	}
-    public static void setAppRI(String filename) {
-    	appFile=filename;
-    }
-    public static String getAppRI() {
-    	return appFile;
-    }
-    public static String getDefaultRI() {
-    	return defaultFile;
-    }
+
+	public static void setAppRI(String filename) {
+		appFile = filename;
+	}
+
+	public static String getAppRI() {
+		return appFile;
+	}
+
+	public static String getDefaultRI() {
+		return defaultFile;
+	}
+
 	/**
 	 * <p>
-	 * Devuelve la instancia única de Context. Si no estaba creada la crea, leyendo
-	 * la configuración por defecto
+	 * Devuelve la instancia Ãºnica de Context. Si no estaba creada la crea, leyendo
+	 * la configuraciÃ³n por defecto
 	 * </p>
 	 * 
-	 * @return La instancia única de Context
+	 * @return La instancia Ãºnica de Context
 	 * @throws IOException Si hay problemas con la lectura del fichero de
-	 *                     configuración
+	 *                     configuraciÃ³n
 	 */
 	public static Context getContext() throws IOException {
 		/**
-		 * Si no está creada crea la instancia única con las propiedades por defecto
+		 * Si no estÃ¡ creada crea la instancia Ãºnica con las propiedades por defecto
 		 */
 		if (contextInstance == null) {
 			contextInstance = new Context();
@@ -98,24 +99,24 @@ public class Context {
 
 	/**
 	 * <p>
-	 * Establece el fichero de configuración específico de la aplicación cliente.
-	 * Las propiedades no establecidas se cogerán de la configuración por defecto
+	 * Establece el fichero de configuraciÃ³n especÃ­fico de la aplicaciÃ³n cliente.
+	 * Las propiedades no establecidas se cogerÃ¡n de la configuraciÃ³n por defecto
 	 * </p>
 	 * 
-	 * @param appConPath Ruta completa al fichero de configuración establecido por la
-	 *               propiedad cliente
+	 * @param appConPath Ruta completa al fichero de configuraciÃ³n establecido por
+	 *                   la propiedad cliente
 	 * @throws IOException Problema lectura fichero
 	 */
 	public static void setAppConf(String appConPath) throws IOException {
 		/**
-		 * Vuelve a leer las propiedades incluyendo las establecidas por la aplicación
+		 * Vuelve a leer las propiedades incluyendo las establecidas por la aplicaciÃ³n
 		 */
 		appConFile = appConPath;
 
 		// customFile=System.getenv("APP_HOME")+customFile;
-		// Otra opción, Usar una variable de entorno para la localizar la ruta de
-		// instalación y de ahí coger el fichero de configuración
-		// También podría localizarse en el home de usuario
+		// Otra opciÃ³n, Usar una variable de entorno para la localizar la ruta de
+		// instalaciÃ³n y de ahÃ­ coger el fichero de configuraciÃ³n
+		// TambiÃ©n podrÃ­a localizarse en el home de usuario
 		getContext().properties.load(new FileInputStream(appConPath));
 	}
 
@@ -128,7 +129,7 @@ public class Context {
 	 * Consulta el tipo de persistencia que se quiere utilizar
 	 * </p>
 	 * 
-	 * @return El tipo de persistencia usado (NOTA: deuda técnica, podría convenir
+	 * @return El tipo de persistencia usado (NOTA: deuda tÃ©cnica, podrÃ­a convenir
 	 *         usar un enumerado, para controlar mejor los tipos disponibles)
 	 * @throws IOException si hay problemas al consultar las propiedades
 	 */
@@ -141,7 +142,7 @@ public class Context {
 	 * Consulta el tipo de remoto que se quiere manejar
 	 * </p>
 	 * 
-	 * @return El tipo de remoto (NOTA: deuda técnica, podría convenir usar un
+	 * @return El tipo de remoto (NOTA: deuda tÃ©cnica, podrÃ­a convenir usar un
 	 *         enumerado, para controlar mejor los tipos disponibles)
 	 * @throws IOException si hay problemas al consultar las propiedades
 	 */
@@ -152,13 +153,12 @@ public class Context {
 
 	/**
 	 * <p>
-	 * No Implementado	
-	 * Deberá leer las propiedades adecuadas, como color, tamaño, tipo... y
-	 * construir un objeto Font
-	 * Si no se ha establecido un valor por defecto se crea una fuente simple
+	 * No Implementado DeberÃ­a leer las propiedades adecuadas, como color, tamaÃ±o,
+	 * tipo... y construir un objeto Font Si no se ha establecido un valor por
+	 * defecto se crea una fuente simple
 	 * </p>
 	 * 
-	 * @return La fuente por defecto para indicadores y métricas
+	 * @return La fuente por defecto para indicadores y mï¿½tricas
 	 */
 	public Font getDefaultFont() {
 		Font font = null;
@@ -174,15 +174,15 @@ public class Context {
 	 * No Implementado
 	 * </p>
 	 * <p>
-	 * Deberá leer las propiedades adecuadas, como color, tamaño, tipo... y
-	 * construir un objeto Font
+	 * DeberÃ³a leer las propiedades adecuadas, como color, taÃ±o, tipo... y construir
+	 * un objeto Font
 	 * </p>
 	 * <p>
-	 * Si no se ha definido una fuente para las métricas se debe devolver la fuente
+	 * Si no se ha definido una fuente para las mÃ©tricas se debe devolver la fuente
 	 * por defecto
 	 * </p>
 	 * 
-	 * @return la fuente para las métricas
+	 * @return la fuente para las mÃ©tricas
 	 */
 	public static Font getMetricFont() {
 		Font font = null;
@@ -195,12 +195,12 @@ public class Context {
 	 * No Implementado
 	 * </p>
 	 * <p>
-	 * Deberá leer las propiedades adecuadas, como color, tamaño, tipo... y
+	 * DeberÃ¡ leer las propiedades adecuadas, como color, tamaÃ±o, tipo... y
 	 * construir un objeto Font
 	 * </p>
 	 * 
 	 * @param state Estado para el que se solicita el color de fuente
-	 * @return La fuente para el indicador cuando el estado es el parámetro pasado
+	 * @return La fuente para el indicador cuando el estado es el parï¿½metro pasado
 	 * @throws IOException problema al leer el fichero
 	 */
 
@@ -213,11 +213,11 @@ public class Context {
 
 	/**
 	 * <p>
-	 * Consulta el nombre de todas las propiedades leídas
+	 * Consulta el nombre de todas las propiedades leï¿½dasÃ­
 	 * </p>
 	 * 
-	 * @return Conjunto con todos los nombres de las propiedades de configuración
-	 *         leídas
+	 * @return Conjunto con todos los nombres de las propiedades de configuraciÃ³n
+	 *         leÃ­das
 	 * @throws IOException si hay problemas al leer las propiedades
 	 */
 	public Set<String> getPropertiesNames() throws IOException {
@@ -228,23 +228,23 @@ public class Context {
 	/**
 	 * <p>
 	 * Crea las propiedades, incluye las propiedades por defecto, leyendo del
-	 * fichero de conf de la API (configuración por defecto)
+	 * fichero de conf de la API (configuraciÃ³n por defecto)
 	 * </p>
 	 * 
 	 * @throws IOException si hay problemas leyendo el fichero
 	 */
 	private void setProperties() throws IOException {
-		log.info("Lectura del fichero de configuración por defecto");
+		log.info("Lectura del fichero de configuraciï¿½n por defecto");
 		FileInputStream file;
-		// Establecemos las propiedades por defecto, del fichero de configuración
+		// Establecemos las propiedades por defecto, del fichero de configuraciÃ³n
 		// embebido en el jar
-	
+
 		properties = new Properties();
-		String filePath="/"+confFile;
-		InputStream is=this.getClass().getResourceAsStream(filePath);
-		log.info("InputStream "+is+" para "+filePath);			
-		properties.load(is);		
-		log.info("Listado de propiedades "+properties);
+		String filePath = "/" + confFile;
+		InputStream is = this.getClass().getResourceAsStream(filePath);
+		log.info("InputStream " + is + " para " + filePath);
+		properties.load(is);
+		log.info("Listado de propiedades " + properties);
 
 	}
 

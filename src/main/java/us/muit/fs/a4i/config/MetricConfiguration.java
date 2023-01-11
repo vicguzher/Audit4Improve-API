@@ -1,28 +1,28 @@
 package us.muit.fs.a4i.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
-import javax.json.JsonReader;
-import javax.json.JsonObject;
+
 import javax.json.Json;
 import javax.json.JsonArray;
-import java.io.InputStreamReader;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
-public class MetricConfiguration implements MetricConfigurationI{
-  
+public class MetricConfiguration implements MetricConfigurationI {
+
 	private static Logger log = Logger.getLogger(Checker.class.getName());
 
-	private HashMap<String,String> isDefinedMetric(String metricName, String metricType, InputStreamReader isr)
+	private HashMap<String, String> isDefinedMetric(String metricName, String metricType, InputStreamReader isr)
 			throws FileNotFoundException {
-		
-		HashMap<String,String> metricDefinition=null;
 
-	
+		HashMap<String, String> metricDefinition = null;
+
 		JsonReader reader = Json.createReader(isr);
 		log.info("Creo el JsonReader");
 
@@ -30,16 +30,16 @@ public class MetricConfiguration implements MetricConfigurationI{
 		log.info("Leo el objeto");
 		reader.close();
 
-		log.info("Muestro la configuración leída " + confObject);
+		log.info("Muestro la configuraciÃ³n leÃ­da " + confObject);
 		JsonArray metrics = confObject.getJsonArray("metrics");
-		log.info("El número de métricas es " + metrics.size());
+		log.info("El nÃºmero de mÃºtricas es " + metrics.size());
 		for (int i = 0; i < metrics.size(); i++) {
 			log.info("nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			if (metrics.get(i).asJsonObject().getString("name").equals(metricName)) {
-				log.info("Localizada la métrica");
+				log.info("Localizada la mÃ©trica");
 				log.info("tipo: " + metrics.get(i).asJsonObject().getString("type"));
 				if (metrics.get(i).asJsonObject().getString("type").equals(metricType)) {
-					metricDefinition=new HashMap<String,String>();
+					metricDefinition = new HashMap<String, String>();
 					metricDefinition.put("description", metrics.get(i).asJsonObject().getString("description"));
 					metricDefinition.put("unit", metrics.get(i).asJsonObject().getString("unit"));
 				}
@@ -49,12 +49,11 @@ public class MetricConfiguration implements MetricConfigurationI{
 
 		return metricDefinition;
 	}
-	private HashMap<String,String> getMetric(String metricName, InputStreamReader isr)
-		throws FileNotFoundException {
-		
-		HashMap<String,String> metricDefinition=null;
 
-	
+	private HashMap<String, String> getMetric(String metricName, InputStreamReader isr) throws FileNotFoundException {
+
+		HashMap<String, String> metricDefinition = null;
+
 		JsonReader reader = Json.createReader(isr);
 		log.info("Creo el JsonReader");
 
@@ -62,44 +61,46 @@ public class MetricConfiguration implements MetricConfigurationI{
 		log.info("Leo el objeto");
 		reader.close();
 
-		log.info("Muestro la configuración leída " + confObject);
+		log.info("Muestro la configuraciÃ³n leÃ­da " + confObject);
 		JsonArray metrics = confObject.getJsonArray("metrics");
-		log.info("El número de métricas es " + metrics.size());
+		log.info("El nÃºmero de mÃ©tricas es " + metrics.size());
 		for (int i = 0; i < metrics.size(); i++) {
 			log.info("nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			if (metrics.get(i).asJsonObject().getString("name").equals(metricName)) {
-				log.info("Localizada la métrica");
-				metricDefinition=new HashMap<String,String>();
+				log.info("Localizada la mï¿½trica");
+				metricDefinition = new HashMap<String, String>();
 				metricDefinition.put("type", metrics.get(i).asJsonObject().getString("type"));
 				metricDefinition.put("description", metrics.get(i).asJsonObject().getString("description"));
 				metricDefinition.put("unit", metrics.get(i).asJsonObject().getString("unit"));
-				}
+			}
 		}
 
 		return metricDefinition;
 	}
-    @Override	
-	public HashMap<String,String> definedMetric(String name, String type) throws FileNotFoundException {
-		log.info("Checker solicitud de búsqueda métrica " + name);
-		
-		HashMap<String,String> metricDefinition=null;
-		
-		String filePath="/"+Context.getDefaultRI();
+
+	@Override
+	public HashMap<String, String> definedMetric(String name, String type) throws FileNotFoundException {
+		log.info("Checker solicitud de bÃºsqueda mÃ©trica " + name);
+
+		HashMap<String, String> metricDefinition = null;
+
+		String filePath = "/" + Context.getDefaultRI();
 		log.info("Buscando el archivo " + filePath);
-		InputStream is=this.getClass().getResourceAsStream(filePath);
-		log.info("InputStream "+is+" para "+filePath);
+		InputStream is = this.getClass().getResourceAsStream(filePath);
+		log.info("InputStream " + is + " para " + filePath);
 		InputStreamReader isr = new InputStreamReader(is);
-		
-	/**
-	 * Busca primero en el fichero de configuración de métricas por defecto
-	 */
+
+		/**
+		 * Busca primero en el fichero de configuraciÃ³n de mÃ©tricas por defecto
+		 */
 		metricDefinition = isDefinedMetric(name, type, isr);
 		/**
-		 * En caso de que no estuviera ahí la métrica busco en el fichero de configuración de la aplicación
+		 * En caso de que no estuviera ahÃ­ la mÃ©trica busco en el fichero de
+		 * configuraciÃ³n de la aplicaciÃ³n
 		 */
-		if ((metricDefinition==null) && Context.getAppRI() != null) {
-			is=new FileInputStream(Context.getAppRI());
-			isr=new InputStreamReader(is);			
+		if ((metricDefinition == null) && Context.getAppRI() != null) {
+			is = new FileInputStream(Context.getAppRI());
+			isr = new InputStreamReader(is);
 			metricDefinition = isDefinedMetric(name, type, isr);
 		}
 
@@ -107,43 +108,45 @@ public class MetricConfiguration implements MetricConfigurationI{
 	}
 
 	@Override
-	public HashMap<String,String> getMetricInfo(String name) throws FileNotFoundException{
-		log.info("Consulta información de la métrica "+name);
-		HashMap<String,String> metricDefinition=null;
-		
-		String filePath="/"+Context.getDefaultRI();
+	public HashMap<String, String> getMetricInfo(String name) throws FileNotFoundException {
+		log.info("Consulta informaciÃ³n de la mÃ©trica " + name);
+		HashMap<String, String> metricDefinition = null;
+
+		String filePath = "/" + Context.getDefaultRI();
 		log.info("Buscando el archivo " + filePath);
-		InputStream is=this.getClass().getResourceAsStream(filePath);
-		log.info("InputStream "+is+" para "+filePath);
+		InputStream is = this.getClass().getResourceAsStream(filePath);
+		log.info("InputStream " + is + " para " + filePath);
 		InputStreamReader isr = new InputStreamReader(is);
-		
-	/**
-	 * Busca primero en el fichero de configuración de métricas por defecto
-	 */
+
+		/**
+		 * Busca primero en el fichero de configuraciÃ³n de mÃ©tricas por defecto
+		 */
 		metricDefinition = getMetric(name, isr);
 		/**
-		 * En caso de que no estuviera ahí la métrica busco en el fichero de configuración de la aplicación
+		 * En caso de que no estuviera ahÃ­ la mÃ©trica busco en el fichero de
+		 * configuraciÃ³n de la aplicaciÃ³n
 		 */
-		if ((metricDefinition==null) && Context.getAppRI() != null) {
-			is=new FileInputStream(Context.getAppRI());
-			isr=new InputStreamReader(is);			
+		if ((metricDefinition == null) && Context.getAppRI() != null) {
+			is = new FileInputStream(Context.getAppRI());
+			isr = new InputStreamReader(is);
 			metricDefinition = getMetric(name, isr);
 		}
-		
+
 		return metricDefinition;
 	}
-    @Override
+
+	@Override
 	public List<String> listAllMetrics() throws FileNotFoundException {
-        log.info("Consulta todas las métricas");
-		
-		List<String> allmetrics=new ArrayList<String>();
-		
-		String filePath="/"+Context.getDefaultRI();
+		log.info("Consulta todas las mï¿½tricas");
+
+		List<String> allmetrics = new ArrayList<String>();
+
+		String filePath = "/" + Context.getDefaultRI();
 		log.info("Buscando el archivo " + filePath);
-		InputStream is=this.getClass().getResourceAsStream(filePath);
-		log.info("InputStream "+is+" para "+filePath);
+		InputStream is = this.getClass().getResourceAsStream(filePath);
+		log.info("InputStream " + is + " para " + filePath);
 		InputStreamReader isr = new InputStreamReader(is);
-		
+
 		JsonReader reader = Json.createReader(isr);
 		log.info("Creo el JsonReader");
 
@@ -151,29 +154,29 @@ public class MetricConfiguration implements MetricConfigurationI{
 		log.info("Leo el objeto");
 		reader.close();
 
-		log.info("Muestro la configuración leída " + confObject);
+		log.info("Muestro la configuraciï¿½n leï¿½da " + confObject);
 		JsonArray metrics = confObject.getJsonArray("metrics");
-		log.info("El número de métricas es " + metrics.size());
+		log.info("El nï¿½mero de mï¿½tricas es " + metrics.size());
 		for (int i = 0; i < metrics.size(); i++) {
-			log.info("Añado nombre: " + metrics.get(i).asJsonObject().getString("name"));
+			log.info("Aï¿½ado nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			allmetrics.add(metrics.get(i).asJsonObject().getString("name"));
 		}
-		if(Context.getAppRI() != null) {
-			is=new FileInputStream(Context.getAppRI());
-			isr=new InputStreamReader(is);	
+		if (Context.getAppRI() != null) {
+			is = new FileInputStream(Context.getAppRI());
+			isr = new InputStreamReader(is);
 			reader = Json.createReader(isr);
 			confObject = reader.readObject();
 			reader.close();
 
-			log.info("Muestro la configuración leída " + confObject);
+			log.info("Muestro la configuraciï¿½n leï¿½da " + confObject);
 			metrics = confObject.getJsonArray("metrics");
-			log.info("El número de métricas es " + metrics.size());
+			log.info("El nï¿½mero de mï¿½tricas es " + metrics.size());
 			for (int i = 0; i < metrics.size(); i++) {
-				log.info("Añado nombre: " + metrics.get(i).asJsonObject().getString("name"));
+				log.info("Aï¿½ado nombre: " + metrics.get(i).asJsonObject().getString("name"));
 				allmetrics.add(metrics.get(i).asJsonObject().getString("name"));
 			}
 		}
-		
+
 		return allmetrics;
-	} 
+	}
 }

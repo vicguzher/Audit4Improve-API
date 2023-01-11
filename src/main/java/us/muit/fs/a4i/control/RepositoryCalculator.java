@@ -7,46 +7,53 @@ import java.util.logging.Logger;
 
 import us.muit.fs.a4i.exceptions.IndicatorException;
 import us.muit.fs.a4i.model.entities.Indicator;
-
 import us.muit.fs.a4i.model.entities.ReportI;
 
 /**
- * <p>Implementa los métodos para calcular indicadores referidos a un repositorio repositorio</p>
- * <p>Puede hacerse uno a uno o todos a la vez</p>
- * @author Isabel Román
+ * <p>
+ * Implementa los mï¿½todos para calcular indicadores referidos a un repositorio
+ * repositorio
+ * </p>
+ * <p>
+ * Puede hacerse uno a uno o todos a la vez
+ * </p>
+ * 
+ * @author Isabel Romï¿½n
  *
  */
 public class RepositoryCalculator implements IndicatorsCalculator {
-	private static Logger log=Logger.getLogger(RepositoryCalculator.class.getName());
+	private static Logger log = Logger.getLogger(RepositoryCalculator.class.getName());
+
 	@Override
-	public void calcIndicator(String indicatorName, ReportManagerI reportManager) throws IndicatorException{
-		log.info("Calcula el indicador de nombre "+indicatorName);
+	public void calcIndicator(String indicatorName, ReportManagerI reportManager) throws IndicatorException {
+		log.info("Calcula el indicador de nombre " + indicatorName);
 		/**
-		 * Tiene que mirar si están ya las métricas que necesita
-		 * Si están lo calcula
-		 * Si no están busca las métricas, las añade al informe y lo calcula
+		 * Tiene que mirar si estÃ¡n ya las mÃ©tricas que necesita Si estÃ¡n lo calcula Si
+		 * no estÃ¡n busca las mÃ©tricas, las aÃ±ade al informe y lo calcula
 		 * 
 		 */
-		
+
 	}
-/**
- * Calcula todos los indicadores definidos para un repositorio
- * Recupera todas las métricas que necesite y que no estén en el informe y las añade al mismo
- * 
- */
+
+	/**
+	 * Calcula todos los indicadores definidos para un repositorio Recupera todas
+	 * las mÃ©tricas que necesite y que no estÃ©n en el informe y las aÃ±ade al mismo
+	 * 
+	 */
 	@Override
-	public void calcAllIndicators(ReportManagerI reportManager) throws IndicatorException{
+	public void calcAllIndicators(ReportManagerI reportManager) throws IndicatorException {
 		log.info("Calcula todos los indicadores del repositorio y los incluye en el informe");
 	}
-    private Indicator commitsPerUser(ReportI report) {
-    	Indicator indicator=null;
-    	
-    	return indicator;
-    }
+
+	private Indicator commitsPerUser(ReportI report) {
+		Indicator indicator = null;
+
+		return indicator;
+	}
+
 	@Override
 	public ReportI.ReportType getReportType() {
 		return ReportI.ReportType.REPOSITORY;
 	}
-	
-	
+
 }

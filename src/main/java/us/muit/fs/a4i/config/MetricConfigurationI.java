@@ -5,26 +5,34 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author isa
+ * @author Isabel Rom√°n
  *
  */
+
 public interface MetricConfigurationI {
 	/**
 	 * <p>
-	 * Comprueba si la mÈtrica est· definida en el fichero por defecto o en el de la
-	 * aplicaciÛn cliente
+	 * Comprueba si la m√©trica est√° definida en el fichero por defecto o en el de la
+	 * aplicaci√≥n cliente
 	 * </p>
 	 * <p>
-	 * TambiÈn verifica que el tipo es el adecuado
+	 * Tambi√©n verifica que el tipo es el adecuado
 	 * </p>
 	 * 
-	 * @param metricName nombre de la mÈtrica que se quiere comprobar
-	 * @param metricType tipo de la mÈtrica
-	 * @return metricDefinition Si la mÈtrica est· definida y el tipo es correcto se devuelve un mapa con las unidades y la descripciÛn
-	 * @throws FileNotFoundException Si no se localiza el fichero de configuraciÛn
+	 * @param metricName nombre de la m√©trica que se quiere comprobar
+	 * @param metricType tipo de la m√©trica
+	 * @return metricDefinition Si la m√©trica est√° definida y el tipo es correcto se
+	 *         devuelve un mapa con las unidades y la descripci√≥n
+	 * @throws FileNotFoundException Si no se localiza el fichero de configuraci√≥n
 	 */
-	public HashMap<String,String> definedMetric(String name,String type) throws FileNotFoundException;
-	public HashMap<String,String> getMetricInfo(String name) throws FileNotFoundException;
+	public HashMap<String, String> definedMetric(String metricName, String metricType) throws FileNotFoundException;
+
+	/**
+	 * @param metricName nombre de la m√©trica que se consulta
+	 * @return la informaci√≥n de la m√©trica en un mapa
+	 * @throws FileNotFoundException
+	 */
+	public HashMap<String, String> getMetricInfo(String metricName) throws FileNotFoundException;
 
 	List<String> listAllMetrics() throws FileNotFoundException;
 }

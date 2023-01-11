@@ -4,7 +4,7 @@
 package us.muit.fs.a4i.control;
 
 /**
- * @author isa
+ * @author Isabel Román
  *
  */
 public interface ReportFormaterI {

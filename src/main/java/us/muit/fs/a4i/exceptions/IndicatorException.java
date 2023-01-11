@@ -1,28 +1,32 @@
 package us.muit.fs.a4i.exceptions;
 
 /**
- * @author Isabel Rom·n
+ * @author Isabel Rom√°n
  *
  */
-public class IndicatorException extends  Exception {
-	 /**
-	 * ExcepciÛn al manejar Indicador
+public class IndicatorException extends Exception {
+	/**
+	 * Excepci√≥n al manejar Indicador
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * InformaciÛn sobre el error
+	 * Informaci√≥n sobre el error
 	 */
 	private String message;
+
 	/**
-	 * <p>Constructor</p>
+	 * <p>
+	 * Constructor
+	 * </p>
+	 * 
 	 * @param info Mensaje definiendo el error
 	 */
-	public IndicatorException(String info){
-		message=info;
+	public IndicatorException(String info) {
+		message = info;
 	}
 
 	@Override
-	    public String getMessage(){
-		 return message;
-    }
+	public String getMessage() {
+		return message;
+	}
 }

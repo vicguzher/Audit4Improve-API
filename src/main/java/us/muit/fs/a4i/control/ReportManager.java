@@ -18,13 +18,12 @@ import us.muit.fs.a4i.persistence.ReportFormater;
 import us.muit.fs.a4i.persistence.ReportFormaterI;
 
 /**
- * @author Isabel Rom·n
+ * @author Isabel RomÔøΩn
  *
  */
 public class ReportManager implements ReportManagerI {
 
-
-	private static Logger log=Logger.getLogger(ReportManager.class.getName());
+	private static Logger log = Logger.getLogger(ReportManager.class.getName());
 	private ReportI report;
 	private PersistenceManager persister;
 	private RemoteEnquirer enquirer;
@@ -33,125 +32,140 @@ public class ReportManager implements ReportManagerI {
 	private String entityId;
 	private ReportI.ReportType reportType;
 
-	
 	public ReportManager(ReportI.ReportType reportType) throws IOException {
-	
-			this.reportType=reportType;
-			this.formater=new ReportFormater();
-			//Selecting the RemoteEnquierer
-			RemoteEnquirer.RemoteType remote=null;
-			
-			remote=	RemoteEnquirer.RemoteType.valueOf(Context.getContext().getRemoteType());		
-			log.info("Tipo de remoto configurado: "+remote);
-			switch (remote) {
-			case GITHUB:
-			    setGHEnquierer();
-				break;
-			default:
-				log.info("Tipo de persistencia no implementando");
-			
-			}
-			//Selecting the persister
-			PersistenceManager.PersistenceType persistence=null;
-			persistence=PersistenceManager.PersistenceType.valueOf(Context.getContext().getPersistenceType());
-			switch(persistence) {
-			case DDBB:
-				log.info("La persistencia para base de datos a˙n no est· implemetnada");
-				break;
-			case EXCEL:
-				this.persister=new ExcelReportManager();
-				log.info("Se instancia el objeto para persistir informes en excel");
-				break;
-			default:
-				break;
-			
-			}
-			//Selecting the IndicatorCalculator
-			switch(this.reportType) {
-			case DEVELOPER:
-				log.info("La calculadora para indicadores de desarrolladores no est· implementada");
-				break;
-			case ORGANIZATION:
-				log.info("La calculadora para indicadores de organizaciÛn no est· implementada");
-				break;
-			case PROJECT:
-				log.info("La calculadora para indicadores de proyecto no est· implementada");
-				break;
-			case REPOSITORY:
-				this.calc=new RepositoryCalculator();
-				log.info("Se instancia la calculadora para indicadores de respositorio");
-				break;
-			default:
-				break;
-			
-			}	
-		
+
+		this.reportType = reportType;
+		this.formater = new ReportFormater();
+		// Selecting the RemoteEnquierer
+		RemoteEnquirer.RemoteType remote = null;
+
+		remote = RemoteEnquirer.RemoteType.valueOf(Context.getContext().getRemoteType());
+		log.info("Tipo de remoto configurado: " + remote);
+		switch (remote) {
+		case GITHUB:
+			setGHEnquierer();
+			break;
+		default:
+			log.info("Tipo de persistencia no implementando");
+
+		}
+		// Selecting the persister
+		PersistenceManager.PersistenceType persistence = null;
+		persistence = PersistenceManager.PersistenceType.valueOf(Context.getContext().getPersistenceType());
+		switch (persistence) {
+		case DDBB:
+			log.info("La persistencia para base de datos aÔøΩn no estÔøΩ implemetnada");
+			break;
+		case EXCEL:
+			this.persister = new ExcelReportManager();
+			log.info("Se instancia el objeto para persistir informes en excel");
+			break;
+		default:
+			break;
+
+		}
+		// Selecting the IndicatorCalculator
+		switch (this.reportType) {
+		case DEVELOPER:
+			log.info("La calculadora para indicadores de desarrolladores no est√° implementada");
+			break;
+		case ORGANIZATION:
+			log.info("La calculadora para indicadores de organizaci√≥n no est√° implementada");
+			break;
+		case PROJECT:
+			log.info("La calculadora para indicadores de proyecto no est√° implementada");
+			break;
+		case REPOSITORY:
+			this.calc = new RepositoryCalculator();
+			log.info("Se instancia la calculadora para indicadores de respositorio");
+			break;
+		default:
+			break;
+
+		}
+
 	}
+
 	/**
-	 * <p>Borra el informe pasado como par·metro, seg˙n las reglas establecidas por el gestor de persistencia</p>
+	 * <p>
+	 * Borra el informe pasado como par√°metro, seg√∫n las reglas establecidas por el
+	 * gestor de persistencia
+	 * </p>
+	 * 
 	 * @param report El informe que se quiere borrar
 	 */
 	public static void deleteReport(ReportI report) {
-		
+
 	}
 
 	/**
-	 * <p>Establece el objeto que se usar· para consultar al servidor remoto y obtener las mÈtricas</p>
-	 * @param remote Objeto RemoteEnquirer que consultar· al servidor remoto
+	 * <p>
+	 * Establece el objeto que se usar√° para consultar al servidor remoto y obtener
+	 * las m√©tricas
+	 * </p>
+	 * 
+	 * @param remote Objeto RemoteEnquirer que consultar√° al servidor remoto
 	 */
 	public void setRemoteEnquirer(RemoteEnquirer remote) {
-		this.enquirer=remote;
+		this.enquirer = remote;
 
 	}
 
-
 	public void setPersistenceManager(PersistenceManager persistence) {
-		this.persister=persistence;
+		this.persister = persistence;
 
 	}
 
 	@Override
 	public void setFormater(ReportFormaterI formater) {
-		this.formater=formater;
+		this.formater = formater;
 
 	}
-
 
 	public void setIndicatorCalc(IndicatorsCalculator calc) {
-		this.calc=calc;
+		this.calc = calc;
 
 	}
+
 	/**
-	 * <p>Persiste el informe que recibe como par·metro, seg˙n las reglas del gestor de persistencia y formateador establecidos</p>
-	 * @param report <p>El informe a persistir</p>
+	 * <p>
+	 * Persiste el informe que recibe como par√°metro, seg√∫n las reglas del gestor de
+	 * persistencia y formateador establecidos
+	 * </p>
+	 * 
+	 * @param report
+	 *               <p>
+	 *               El informe a persistir
+	 *               </p>
 	 */
 	public void saveReport(ReportI report) {
-		
+
 		persister.setFormater(formater);
 		try {
 			persister.saveReport(report);
 		} catch (ReportNotDefinedException e) {
-			log.info("El informe que se quiere guardar no est· definido");
+			log.info("El informe que se quiere guardar no est√° definido");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void saveReport() throws ReportNotDefinedException {
-		if(report!=null) {
+		if (report != null) {
 			saveReport(report);
-		}else throw new ReportNotDefinedException();
-		
+		} else
+			throw new ReportNotDefinedException();
+
 	}
-   
+
 	@Override
-	public ReportI newReport(String entityId,ReportI.ReportType reportType) throws Exception {
-		if (reportType != this.reportType){
-			log.info("Se est· intentando crear un tipo de informe diferente al ReportManager usado");
+	public ReportI newReport(String entityId, ReportI.ReportType reportType) throws Exception {
+		if (reportType != this.reportType) {
+			log.info("Se est√° intentando crear un tipo de informe diferente al ReportManager usado");
 			throw new Exception("El tipo de informe no coincide con el del ReportManager");
 		}
-		
-		report=enquirer.buildReport(entityId);
+
+		report = enquirer.buildReport(entityId);
 		return report;
 	}
 
@@ -162,7 +176,7 @@ public class ReportManager implements ReportManagerI {
 	}
 
 	/**
-	 * Devuelve el informe que est· manejando este gestor
+	 * Devuelve el informe que est√° manejando este gestor
 	 */
 	@Override
 	public ReportI getReport() {
@@ -172,7 +186,7 @@ public class ReportManager implements ReportManagerI {
 	@Override
 	public void addMetric(String metricName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -184,35 +198,34 @@ public class ReportManager implements ReportManagerI {
 	@Override
 	public void addIndicator(String indicatorName) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void getIndicator(String indicatorName) {
 		// TODO Auto-generated method stub
-		
-	}	
-	
-	
+
+	}
+
 	private void setGHEnquierer() {
-			switch(this.reportType) {
-			case REPOSITORY:
-				this.enquirer=new GitHubRepositoryEnquirer();
-				log.info("Se instancia el enquierer para informes de repositorio con info de github");
-				break;
-			case DEVELOPER:
-				log.info("El enquierer para los informes de desarrolladores con info de github a˙n no est· implementado");
-				break;
-			case ORGANIZATION:
-				log.info("El enquierer para los informes de la organizaciÛn con info de github a˙n no est· implementado");
-				break;
-			case PROJECT:
-				log.info("El enquierer para los informes de proyecto con info de github a˙n no est· implementado");
-				break;
-			default:
-				log.info("El tipo de informe que se est· solicitando no est· implementado");
-				break;
-			}		
-	}	
+		switch (this.reportType) {
+		case REPOSITORY:
+			this.enquirer = new GitHubRepositoryEnquirer();
+			log.info("Se instancia el enquierer para informes de repositorio con info de github");
+			break;
+		case DEVELOPER:
+			log.info("El enquierer para los informes de desarrolladores con info de github a√∫n no est√° implementado");
+			break;
+		case ORGANIZATION:
+			log.info("El enquierer para los informes de la organizaci√≥n con info de github a√∫n no est√° implementado");
+			break;
+		case PROJECT:
+			log.info("El enquierer para los informes de proyecto con info de github a√∫n no est√° implementado");
+			break;
+		default:
+			log.info("El tipo de informe que se est√° solicitando no est√° implementado");
+			break;
+		}
+	}
 
 }
-

@@ -1,29 +1,32 @@
 package us.muit.fs.a4i.config;
 
 import java.util.logging.Logger;
+
 /**
- * Mantengo separada la l骻ica de la gesti髇 de configuraci髇 de m閠ricas e indicadores porque en el futuro van a ser bastante diferentes
- * En la versi髇 actual son muy similares y por tanto el dise駉 no es bueno ya que no identifica bien la reutilizaci髇
- * @author isa
+ * Mantengo separada la l贸gica de la gesti贸n de configuraci贸n de m茅tricas e
+ * indicadores porque en el futuro van a ser bastante diferentes En la versi贸n
+ * actual son muy similares y por tanto el dise帽o no es bueno ya que no
+ * identifica bien la reutilizaci贸n
+ * 
+ * @author Isabel Rom谩n
  *
  */
-public class Checker{
+public class Checker {
 	private static Logger log = Logger.getLogger(Checker.class.getName());
-		
-    private MetricConfigurationI metricConf;
-    private IndicatorConfigurationI indiConf;
 
-	
-	Checker(){
-		this.metricConf=new MetricConfiguration();
-		this.indiConf=new IndicatorConfiguration();
+	private MetricConfigurationI metricConf;
+	private IndicatorConfigurationI indiConf;
+
+	Checker() {
+		this.metricConf = new MetricConfiguration();
+		this.indiConf = new IndicatorConfiguration();
 	}
+
 	public MetricConfigurationI getMetricConfiguration() {
 		return this.metricConf;
-	} 
+	}
+
 	public IndicatorConfigurationI getIndicatorConfiguration() {
 		return this.indiConf;
 	}
 }
-
-
