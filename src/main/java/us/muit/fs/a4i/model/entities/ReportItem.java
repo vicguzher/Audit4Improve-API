@@ -35,7 +35,7 @@ public class ReportItem<T> implements ReportItemI<T> {
 	 */
 	private Date date;
 	/**
-	 * Descripci�n del elemento del informe
+	 * Descripción del elemento del informe
 	 */
 	private String description;
 	/**

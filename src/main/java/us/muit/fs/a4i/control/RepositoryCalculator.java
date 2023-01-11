@@ -11,14 +11,14 @@ import us.muit.fs.a4i.model.entities.ReportI;
 
 /**
  * <p>
- * Implementa los m�todos para calcular indicadores referidos a un repositorio
+ * Implementa los métodos para calcular indicadores referidos a un repositorio
  * repositorio
  * </p>
  * <p>
  * Puede hacerse uno a uno o todos a la vez
  * </p>
  * 
- * @author Isabel Rom�n
+ * @author Isabel Román
  *
  */
 public class RepositoryCalculator implements IndicatorsCalculator {

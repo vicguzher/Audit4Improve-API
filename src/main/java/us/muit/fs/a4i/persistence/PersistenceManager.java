@@ -42,7 +42,7 @@ public interface PersistenceManager {
 	 * Borra el informe
 	 * </p>
 	 * 
-	 * @param report informe a persistir
+	 * @param report informe a borrar
 	 * @throws ReportNotDefinedException si el informe es nulo dará error
 	 */
 	void deleteReport(ReportI report) throws ReportNotDefinedException;

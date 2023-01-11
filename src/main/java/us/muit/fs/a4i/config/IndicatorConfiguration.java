@@ -77,7 +77,7 @@ public class IndicatorConfiguration implements IndicatorConfigurationI {
 
 		log.info("Muestro la configuraci�n le�da " + confObject);
 		JsonArray indicators = confObject.getJsonArray("indicators");
-		log.info("El n�mero de indicadores es " + indicators.size());
+		log.info("El número de indicadores es " + indicators.size());
 		for (int i = 0; i < indicators.size(); i++) {
 			log.info("nombre: " + indicators.get(i).asJsonObject().getString("name"));
 			if (indicators.get(i).asJsonObject().getString("name").equals(indicatorName)) {
@@ -97,7 +97,7 @@ public class IndicatorConfiguration implements IndicatorConfigurationI {
 
 	@Override
 	public List<String> listAllIndicators() throws FileNotFoundException {
-		log.info("Consulta todas las m�tricas");
+		log.info("Consulta todas las métricas");
 
 		List<String> allmetrics = new ArrayList<String>();
 

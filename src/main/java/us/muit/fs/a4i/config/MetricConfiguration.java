@@ -32,7 +32,7 @@ public class MetricConfiguration implements MetricConfigurationI {
 
 		log.info("Muestro la configuración leída " + confObject);
 		JsonArray metrics = confObject.getJsonArray("metrics");
-		log.info("El número de mútricas es " + metrics.size());
+		log.info("El número de métricas es " + metrics.size());
 		for (int i = 0; i < metrics.size(); i++) {
 			log.info("nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			if (metrics.get(i).asJsonObject().getString("name").equals(metricName)) {
@@ -137,7 +137,7 @@ public class MetricConfiguration implements MetricConfigurationI {
 
 	@Override
 	public List<String> listAllMetrics() throws FileNotFoundException {
-		log.info("Consulta todas las m�tricas");
+		log.info("Consulta todas las métricas");
 
 		List<String> allmetrics = new ArrayList<String>();
 
@@ -154,11 +154,11 @@ public class MetricConfiguration implements MetricConfigurationI {
 		log.info("Leo el objeto");
 		reader.close();
 
-		log.info("Muestro la configuraci�n le�da " + confObject);
+		log.info("Muestro la configuración leída " + confObject);
 		JsonArray metrics = confObject.getJsonArray("metrics");
-		log.info("El n�mero de m�tricas es " + metrics.size());
+		log.info("El número de métricas es " + metrics.size());
 		for (int i = 0; i < metrics.size(); i++) {
-			log.info("A�ado nombre: " + metrics.get(i).asJsonObject().getString("name"));
+			log.info("Añado nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			allmetrics.add(metrics.get(i).asJsonObject().getString("name"));
 		}
 		if (Context.getAppRI() != null) {
@@ -168,11 +168,11 @@ public class MetricConfiguration implements MetricConfigurationI {
 			confObject = reader.readObject();
 			reader.close();
 
-			log.info("Muestro la configuraci�n le�da " + confObject);
+			log.info("Muestro la configuración leída " + confObject);
 			metrics = confObject.getJsonArray("metrics");
-			log.info("El n�mero de m�tricas es " + metrics.size());
+			log.info("El número de m´rtricas es " + metrics.size());
 			for (int i = 0; i < metrics.size(); i++) {
-				log.info("A�ado nombre: " + metrics.get(i).asJsonObject().getString("name"));
+				log.info("Añado nombre: " + metrics.get(i).asJsonObject().getString("name"));
 				allmetrics.add(metrics.get(i).asJsonObject().getString("name"));
 			}
 		}
