@@ -23,16 +23,20 @@ public interface MetricConfigurationI {
 	 * @param metricType tipo de la métrica
 	 * @return metricDefinition Si la métrica está definida y el tipo es correcto se
 	 *         devuelve un mapa con las unidades y la descripción
-	 * @throws FileNotFoundException Si no se localiza el fichero de configuración
+	 * @throws FileNotFoundException Si hay algún problema con el fichero de configuración
 	 */
 	public HashMap<String, String> definedMetric(String metricName, String metricType) throws FileNotFoundException;
 
 	/**
 	 * @param metricName nombre de la métrica que se consulta
 	 * @return la información de la métrica en un mapa
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Si hay algún problema con el fichero de configuración
 	 */
 	public HashMap<String, String> getMetricInfo(String metricName) throws FileNotFoundException;
 
+	/**
+	 * @return listado con los nombres de todas las métricas disponibles
+	 * @throws FileNotFoundException Si hay algún problema con el fichero de configuración
+	 */
 	List<String> listAllMetrics() throws FileNotFoundException;
 }

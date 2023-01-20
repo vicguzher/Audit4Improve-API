@@ -67,8 +67,9 @@ public class MetricConfiguration implements MetricConfigurationI {
 		for (int i = 0; i < metrics.size(); i++) {
 			log.info("nombre: " + metrics.get(i).asJsonObject().getString("name"));
 			if (metrics.get(i).asJsonObject().getString("name").equals(metricName)) {
-				log.info("Localizada la m�trica");
+				log.info("Localizada la métrica");
 				metricDefinition = new HashMap<String, String>();
+				metricDefinition.put("name", metricName);
 				metricDefinition.put("type", metrics.get(i).asJsonObject().getString("type"));
 				metricDefinition.put("description", metrics.get(i).asJsonObject().getString("description"));
 				metricDefinition.put("unit", metrics.get(i).asJsonObject().getString("unit"));
@@ -170,7 +171,7 @@ public class MetricConfiguration implements MetricConfigurationI {
 
 			log.info("Muestro la configuración leída " + confObject);
 			metrics = confObject.getJsonArray("metrics");
-			log.info("El número de m´rtricas es " + metrics.size());
+			log.info("El número de métricas es " + metrics.size());
 			for (int i = 0; i < metrics.size(); i++) {
 				log.info("Añado nombre: " + metrics.get(i).asJsonObject().getString("name"));
 				allmetrics.add(metrics.get(i).asJsonObject().getString("name"));

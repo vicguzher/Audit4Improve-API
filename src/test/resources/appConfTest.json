@@ -9,7 +9,7 @@
 		{
 			"name": "comments",
 			"type": "java.lang.Integer",
-			"description": "N�meoro de comentarios",
+			"description": "Número de comentarios",
 			"unit": "comments"
 		}
 	],
@@ -23,7 +23,7 @@
 		{
 			"name": "commentsInterest",
 			"type": "java.lang.Double",
-			"description": "Ratio de comentarios con m�s de 1 respuesta frente al n�mero total de comentarios",
+			"description": "Ratio de comentarios con más de 1 respuesta frente al número total de comentarios",
 			"unit": "ratio"
 		}
 	]
