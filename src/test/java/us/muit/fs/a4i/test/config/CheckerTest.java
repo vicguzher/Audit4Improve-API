@@ -25,9 +25,9 @@ import us.muit.fs.a4i.config.Checker;
 import us.muit.fs.a4i.config.Context;
 
 /**
- * Test de la clase Checker que verifica las m�tricas e indicadores
+ * Test de la clase Checker que permite verificar y configurar las métricas e indicadores
  * 
- * @author Isabel Rom�n
+ * @author Isabel Román
  * @see org.junit.jupiter.api.Tag
  *
  */
@@ -39,48 +39,50 @@ class CheckerTest {
 	static String appConfPath;
 
 	/**
+	 * <p>Acciones a realizar antes de ejecutar los tests definidos en esta clase</p>
 	 * @throws java.lang.Exception
 	 * @see org.junit.jupiter.api.BeforeAll
 	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		// Acciones a realizar antes de ejecutar los tests de esta clase
 		appConfPath = "src" + File.separator + "test" + File.separator + "resources" + File.separator
 				+ "appConfTest.json";
 	}
 
 	/**
+	 * <p>Acciones a realizar después de ejecutar todos los tests de esta clase</p>
 	 * @throws java.lang.Exception
 	 * @see org.junit.jupiter.api.AfterAll
 	 */
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		// Acciones a realizar despu�s de ejecutar todos los tests de esta clase
+		
 	}
 
 	/**
+	 * <p> Acciones a realizar antes de cada uno de los tests de esta clase</p>
 	 * @throws java.lang.Exception
 	 * @see org.junit.jupiter.api.BeforeEach
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		// Acciones a realizar antes de cada uno de los tests de esta clase
 		// Creo el objeto bajo test, un Checker
 		underTest = Context.getContext().getChecker();
 	}
 
 	/**
+	 * <p>Acciones a realizar después de cada uno de los tests de esta clase</p>
 	 * @throws java.lang.Exception
 	 * @see org.junit.jupiter.api.AfterEach
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
-		// Acciones a realizar despu�s de cada uno de los tests de esta clase
+		
 	}
 
 	/**
-	 * Test para el m�todo que establece el fichero de configuraci�n de la
-	 * aplicaci�n
+	 * <p>Test para el método que establece el fichero de configuración de la
+	 * aplicación</p>
 	 * {@link us.muit.fs.a4i.config.Checker#setAppMetrics(java.lang.String)}.
 	 */
 	@Test
@@ -89,26 +91,24 @@ class CheckerTest {
 	}
 
 	/**
-	 * Test para verificar el m�todo
+	 * <p>Test para verificar el método
 	 * {@link us.muit.fs.a4i.config.Checker#definedMetric(java.lang.String, java.lang.String)}.
-	 * Si la m�trica est� definida y el tipo de valor que se quiere establecer es el
-	 * adecuado debe devolver un hashmap con los datos de la m�trica, usando como
+	 * Si la métrica está definida y el tipo de valor que se quiere establecer es el
+	 * adecuado debe devolver un hashmap con los datos de la métrica, usando como
 	 * clave las etiquetas:
 	 * <ul>
 	 * <li>description</li>
 	 * <li>unit</li>
 	 * </ul>
-	 * Las m�tricas pueden estar definidas en el fichero de configuraci�n de la api
-	 * (a4iDefault.json) o en otro fichero configurado por la aplicaci�n cliente.
-	 * Para los test este fichero es appConfTest.json y se guarda junto al c�digo de
+	 * Las métricas pueden estar definidas en el fichero de configuración de la api
+	 * (a4iDefault.json) o en otro fichero configurado por la aplicación cliente.
+	 * Para los test este fichero es appConfTest.json y se guarda junto al código de
 	 * test, en la carpeta resources
 	 * 
 	 * @see org.junit.jupiter.api.Tag
 	 * @see org.junit.jupiter.api.Test
-	 * @see org.junit.jupiter.api.DisplayName
-	 * 
-	 *      Test para verificar el m�todo
-	 *      {@link us.muit.fs.a4i.config.Checker#definedMetric(java.lang.String, java.lang.String)}.
+	 * @see org.junit.jupiter.api.DisplayName	 * 
+	 *    </p>
 	 */
 	@Test
 	@Tag("unidad")

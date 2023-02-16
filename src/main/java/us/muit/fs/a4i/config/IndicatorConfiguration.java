@@ -46,7 +46,7 @@ public class IndicatorConfiguration implements IndicatorConfigurationI {
 	 */
 	public HashMap<String, String> definedIndicator(String name, String type) throws FileNotFoundException {
 		HashMap<String, String> indicatorDefinition = null;
-		log.info("Checker solicitud de b�squeda indicador " + name);
+		log.info("Checker solicitud de búsqueda indicador " + name);
 
 		String filePath = "/" + Context.getDefaultRI();
 		log.info("Buscando el archivo " + filePath);
@@ -75,7 +75,7 @@ public class IndicatorConfiguration implements IndicatorConfigurationI {
 		log.info("Leo el objeto");
 		reader.close();
 
-		log.info("Muestro la configuraci�n le�da " + confObject);
+		log.info("Muestro la configuración leída " + confObject);
 		JsonArray indicators = confObject.getJsonArray("indicators");
 		log.info("El número de indicadores es " + indicators.size());
 		for (int i = 0; i < indicators.size(); i++) {

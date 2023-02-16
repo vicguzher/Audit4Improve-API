@@ -59,7 +59,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 	 * </p>
 	 */
 	protected ReportFormaterI formater;
-	ReportI report;
+	
 	FileInputStream inputStream = null;
 
 	/**
@@ -78,13 +78,16 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 	protected HSSFWorkbook wb = null;
 	protected HSSFSheet sheet = null;
 
-	/**
-	 * @param report añade el informe
-	 */
-	public void setReport(ReportI report) {
-		log.info("Establece el informe");
-		this.report = report;
+	public ExcelReportManager(String filePath, String fileName) {
+		super();
+		this.filePath = filePath;
+		this.fileName = fileName;
 	}
+
+	public ExcelReportManager() {
+		super();
+	}
+
 
 	@Override
 	public void setFormater(ReportFormaterI formater) {
@@ -109,16 +112,16 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 
 	/**
 	 * <p>
-	 * El libro contendrán todos los informes de un tipo concreto Primero hay que
-	 * abrir el libro Busco la hoja correspondiente a esta entidad, si ya existe la
-	 * elimino Creo la hoja
+	 * El libro contendrá todos los informes de un tipo concreto. Primero hay que
+	 * abrir el libro. Busco la hoja correspondiente a esta entidad, si ya existe la
+	 * elimino. Creo la hoja
 	 * </p>
 	 * 
 	 * @return Hoja de excel
 	 * @throws IOException                error al abrir el fichero
 	 * @throws EncryptedDocumentException documento protegido
 	 */
-	protected HSSFSheet getCleanSheet() throws EncryptedDocumentException, IOException {
+	protected HSSFSheet getCleanSheet(String entityId) throws EncryptedDocumentException, IOException {
 		log.info("Solicita una hoja nueva del libro manejado");
 		if (wb == null) {
 			inputStream = new FileInputStream(filePath + fileName + ".xls");
@@ -133,22 +136,22 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 			 **/
 			/**
 			 * <p>
-			 * Verifico si la hoja existe y si es as� la extraigo
+			 * Verifico si la hoja existe y si es así la extraigo
 			 * </p>
 			 * <p>
 			 * Si no existe la creo.
 			 */
-			sheet = wb.getSheet(report.getEntityId().replaceAll("/", "."));
+			sheet = wb.getSheet(entityId.replaceAll("/", "."));
 
 			if (sheet != null) {
-				log.info("Recuperada hoja, que ya exist�a");
+				log.info("Recuperada hoja, que ya existía");
 				/*
 				 * Si la hoja existe la elimino
 				 */
 				int index = wb.getSheetIndex(sheet);
 				wb.removeSheetAt(index);
 			}
-			sheet = wb.createSheet(report.getEntityId().replaceAll("/", "."));
+			sheet = wb.createSheet(entityId.replaceAll("/", "."));
 			log.info("Creada hoja nueva");
 
 		}
@@ -169,7 +172,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 		try {
 			FileOutputStream out;
 			if (sheet == null) {
-				sheet = getCleanSheet();
+				sheet = getCleanSheet(report.getEntityId());
 			}
 
 			/**
@@ -179,19 +182,26 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 			 */
 			int rowIndex = sheet.getLastRowNum();
 			rowIndex++;
-			sheet.createRow(rowIndex).createCell(0).setCellValue("Métricas tomadas el día ");
+			sheet.createRow(rowIndex).createCell(0).setCellValue("Métricas guardadas el día ");
 			sheet.getRow(rowIndex).createCell(1)
 					.setCellValue(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)).toString());
 			Collection<ReportItemI> collection = report.getAllMetrics();
 			for (ReportItemI metric : collection) {
 				persistMetric(metric);
 			}
-
+			//Ahora irían los indicadores
+			rowIndex++;
+            sheet.createRow(rowIndex).createCell(0).setCellValue("Indicadores");
+			collection = report.getAllIndicators();
+			for (ReportItemI indicator : collection) {
+				persistIndicator(indicator);
+			}
+            
 			out = new FileOutputStream(filePath + fileName + ".xls");
 			wb.write(out);
 			out.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -223,7 +233,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 
 	private void persistIndicator(ReportItemI indicator) {
 		log.info("Introduzco indicador en la hoja");
-
+        //Mantengo uno diferente porque en el futuro la información del indicador será distinta a la de la métrica
 		int rowIndex = sheet.getLastRowNum();
 		rowIndex++;
 		Row row = sheet.createRow(rowIndex);

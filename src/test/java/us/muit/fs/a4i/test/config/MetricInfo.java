@@ -16,7 +16,7 @@ import us.muit.fs.a4i.config.Checker;
 import us.muit.fs.a4i.config.Context;
 
 /**
- * @author isa
+ * @author Isabel Román
  *
  */
 class MetricInfo {
@@ -30,15 +30,15 @@ class MetricInfo {
 		try {
 			Checker checker = Context.getContext().getChecker();
 			HashMap<String, String> metricInfo = checker.getMetricConfiguration().getMetricInfo("issues");
-			assertEquals(metricInfo.get("name"), "issues", "No se ha le�do bien el nombre de la m�trica");
-			assertEquals(metricInfo.get("type"), "java.lang.Integer", "No se ha le�do bien el tipo de la m�trica");
+			assertEquals(metricInfo.get("name"), "issues", "No se ha leído bien el nombre de la métrica");
+			assertEquals(metricInfo.get("type"), "java.lang.Integer", "No se ha leído bien el tipo de la métrica");
 			assertEquals(metricInfo.get("description"), "Tareas sin finalizar en el repositorio",
-					"No se ha le�do bien la descripci�n de la m�trica");
+					"No se ha leído bien la descripción de la métrica");
 			assertEquals(metricInfo.get("unit"), "issues", "No se ha le�do bien las unidades de la m�trica");
 		} catch (IOException e) {
 
 			e.printStackTrace();
-			fail("No deber�a devolver esta excepci�n");
+			fail("No debería devolver esta excepción");
 		}
 
 	}

@@ -72,6 +72,7 @@ class ContextTest {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
+		//Ejecutar tras cada test
 	}
 
 	/**
@@ -190,6 +191,7 @@ class ContextTest {
 	}
 
 	/**
+	 * <p>Este test permite verificar que se lee bien la fuente, además es independiente del orden de ejecución del resto de test. La complejidad de la verifiación está impuesta por estar probando un singleton</p>
 	 * Test method for {@link us.muit.fs.a4i.config.Context#getDefaultFont()}.
 	 */
 	@Test
@@ -198,11 +200,14 @@ class ContextTest {
 			Font font = null;
 			String color;
 			// Uso esto para ver los tipos de fuentes de los que dispongo
-			String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-			log.info("listado de fuentes " + Arrays.toString(fontNames));
+			//String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+			//log.info("listado de fuentes " + Arrays.toString(fontNames));
 			font = Context.getContext().getDefaultFont();
 			assertNotNull(font, "No se ha inicializado bien la fuente");
-			assertEquals("Arial", font.getName(), "No es el tipo de fuente especificado en el fichero de propiedades");
+			//Al ser Context un singleton una vez creada la instancia no se puede eliminar "desde fuera"
+			//De manera que el valor de la fuente depende del orden en el que se ejecuten los test, y para que el test sea independiente de eso la verificación comprueba los dos posibles valores
+			assertTrue("Arial".equals(font.getName()) || "Times".equals(font.getName()),"No es el tipo de fuente especificado en el fichero de propiedades");
+			
 
 		} catch (IOException e) {
 			fail("No debería devolver esta excepción");

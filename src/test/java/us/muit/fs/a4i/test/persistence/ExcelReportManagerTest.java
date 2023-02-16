@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import us.muit.fs.a4i.model.entities.ReportI;
 import us.muit.fs.a4i.model.entities.ReportItem;
 import us.muit.fs.a4i.persistence.ExcelReportManager;
 import us.muit.fs.a4i.persistence.ReportFormaterI;
@@ -38,6 +39,9 @@ class ExcelReportManagerTest {
 	private static ReportItem<Integer> metricIntMock = Mockito.mock(ReportItem.class);
 	@Mock(serializable = true)
 	private static ReportItem<String> metricStrMock = Mockito.mock(ReportItem.class);
+	@Mock(serializable = true)
+	private static ReportI informe = Mockito.mock(ReportI.class);
+	
 
 	@Test
 	void ExcelCreation() {
