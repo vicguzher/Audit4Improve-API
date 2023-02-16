@@ -22,6 +22,10 @@ public class Indicator implements IndicatorI {
 		this.state = IndicatorState.UNDEFINED;
 	}
 
+	/**
+	 * @param state Estado del nuevo indicador
+	 * @param metrics Colección de métricas en las que se basa el indicador
+	 */
 	public Indicator(IndicatorState state, Collection<ReportItemI> metrics) {
 		this.metrics = metrics;
 		this.state = state;

@@ -2,6 +2,11 @@ package us.muit.fs.a4i.model.entities;
 
 import java.util.Collection;
 
+/**
+ * <p>Interfaz para la gestión de informes</p>
+ * @author Isabel Román
+ *
+ */
 public interface ReportI {
 	/**
 	 * <p>

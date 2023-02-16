@@ -78,6 +78,9 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 	protected HSSFWorkbook wb = null;
 	protected HSSFSheet sheet = null;
 
+	/**
+	 * @param report añade el informe
+	 */
 	public void setReport(ReportI report) {
 		log.info("Establece el informe");
 		this.report = report;

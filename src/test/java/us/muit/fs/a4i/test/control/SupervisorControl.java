@@ -17,10 +17,10 @@ import org.kohsuke.github.PagedIterable;
 
 /**
  * @author Isabel Rom�n Mart�nez
- * @version 0.0 Esta clase se crea para poder probar algunas de las capacidades
- *          que ofrece la api github Ser� descartada posteriormente No usa
- *          Junit, sino que crea un main, no tiene verificaciones autom�ticas,
- *          la automatizaci�n no es posible
+ * @version 0.2 Esta clase se crea para poder probar algunas de las capacidades
+ *          que ofrece la api github Serádescartada posteriormente No usa
+ *          Junit, sino que crea un main, no tiene verificaciones automáticas,
+ *          la automatización no es posible
  *
  */
 public class SupervisorControl {
@@ -38,7 +38,7 @@ public class SupervisorControl {
 			PagedIterable<GHRepository> myOwnRepos = myinfo.listRepositories(10, GHMyself.RepositoryListFilter.OWNER);
 			int count = 1;
 			for (GHRepository repo : myOwnRepos.toList()) {
-				System.out.println("Nombre de mi repositorio n�mero " + count + " " + repo.getFullName());
+				System.out.println("Nombre de mi repositorio número " + count + " " + repo.getFullName());
 				List<GHProject> proyectos = repo.listProjects().toList();
 				int i = 1;
 				for (GHProject project : proyectos) {
@@ -59,7 +59,7 @@ public class SupervisorControl {
 			// misOrganizaciones.iterator();
 			int i = 1;
 			for (GHOrganization organizacion : misOrganizaciones) {
-				System.out.println(i + " Organizaci�n " + organizacion.getId() + " : " + organizacion);
+				System.out.println(i + " Organización " + organizacion.getId() + " : " + organizacion);
 				PagedIterable<GHRepository> repos = organizacion.listRepositories();
 				System.out.println(repos);
 				i++;
@@ -71,10 +71,10 @@ public class SupervisorControl {
 			 */
 			GHOrganization unaOrg = github.getOrganization("MIT-FS");
 			// PagedIterable<GHRepository> repos=unaOrg.listRepositories();
-			System.out.println("Recupero la organizaci�n " + unaOrg.getId());
+			System.out.println("Recupero la organización " + unaOrg.getId());
 
 			GHRepository githubrepo = github.getRepository("hub4j/github-api");
-			System.out.println("Este repositorio es de " + githubrepo.getOwnerName() + " Y su descripci�n es "
+			System.out.println("Este repositorio es de " + githubrepo.getOwnerName() + " Y su descripción es "
 					+ githubrepo.getDescription());
 
 			GHRepositoryStatistics estadisticas = githubrepo.getStatistics();
@@ -84,7 +84,7 @@ public class SupervisorControl {
 			PagedIterable<GHRepositoryStatistics.ContributorStats> estDes = estadisticas.getContributorStats();
 			log.info("Desarrolladores recogidos");
 			List<GHRepositoryStatistics.ContributorStats> listaDesarrolladores = estDes.toList();
-			System.out.println("N�mero de desarrolladores " + listaDesarrolladores.size());
+			System.out.println("Número de desarrolladores " + listaDesarrolladores.size());
 
 			i = 1;
 

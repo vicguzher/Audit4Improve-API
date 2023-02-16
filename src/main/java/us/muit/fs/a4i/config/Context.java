@@ -112,7 +112,7 @@ public class Context {
 	 * cliente/aplicación
 	 * </p>
 	 * 
-	 * @return
+	 * @return ruta del fichero de configuración de métricas e indicadores de la aplicación cliente
 	 */
 	public static String getAppRI() {
 		return appFile;
@@ -170,6 +170,9 @@ public class Context {
 		log.info("Las nuevas propiedades son " + getContext().properties);
 	}
 
+	/**
+	 * @return devuelve el verificador (checker)
+	 */
 	public Checker getChecker() {
 		return checker;
 	}
