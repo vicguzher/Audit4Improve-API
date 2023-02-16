@@ -6,7 +6,7 @@
  * json
  * </p>
  * <img src=
- * "https://raw.githubusercontent.com/MIT-FS/Audit4Improve-API/gh-pages/doc-files/configPackage.GIF"
+ * "https://raw.githubusercontent.com/MIT-FS/Audit4Improve-API/gh-pages/doc-files/configPackage.gif"
  * alt="Paquete para la configuración" height="25%" width="50%">
  * 
  * @author Isabel Román
