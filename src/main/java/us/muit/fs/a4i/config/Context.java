@@ -47,29 +47,31 @@ public class Context {
 	private static Context contextInstance = null;
 
 	/**
-	 * Propiedades de la API
-	 * Se leerán del fichero de configuración por defecto y del especificado por la aplicación, si lo hubiera
+	 * Propiedades de la API Se leerán del fichero de configuración por defecto y
+	 * del especificado por la aplicación, si lo hubiera
 	 */
 	private Properties properties = null;
-	/** 
+	/**
 	 * Fichero de propiedades de configuración de la API, embebido en el jar
 	 */
 	private static String confFile = "a4i.conf";
-	
+
 	/**
-	 * Fichero de especificación de métricas e indicadores por defecto, embebido en el jar
+	 * Fichero de especificación de métricas e indicadores por defecto, embebido en
+	 * el jar
 	 * 
 	 */
 	private static String defaultFile = "a4iDefault.json";
-	
+
 	/**
 	 * Fichero de propiedades de la API establecido por la aplicación cliente
 	 */
 	private static String appConFile = null;
-	
+
 	/**
-	 * Fichero de especificación de métricas e indicadores establecido por la aplicación cliente
-	 */	
+	 * Fichero de especificación de métricas e indicadores establecido por la
+	 * aplicación cliente
+	 */
 	private static String appFile = null;
 	/**
 	 * Referencia al verificador de métricas e indicadores
@@ -77,7 +79,11 @@ public class Context {
 	private Checker checker = null;
 
 	/**
-	 * <p>Constructor privado, sigue el patrón singleton. El único objeto posible se crea al invocar el método getContext</p>
+	 * <p>
+	 * Constructor privado, sigue el patrón singleton. El único objeto posible se
+	 * crea al invocar el método getContext
+	 * </p>
+	 * 
 	 * @throws IOException
 	 */
 	private Context() throws IOException {
@@ -88,15 +94,24 @@ public class Context {
 	}
 
 	/**
-	 * <p>Establece la ruta del fichero de métricas e indicadores indicado por el cliente/aplicación</p>
-	 * @param filename ruta al fichero de configuración de métricas e indicadores de la aplicación cliente
+	 * <p>
+	 * Establece la ruta del fichero de métricas e indicadores indicado por el
+	 * cliente/aplicación
+	 * </p>
+	 * 
+	 * @param filename ruta al fichero de configuración de métricas e indicadores de
+	 *                 la aplicación cliente
 	 */
 	public static void setAppRI(String filename) {
 		appFile = filename;
 	}
 
 	/**
-	 * <p>Consulta la ruta del fichero de configuración de métricas e indicadores del cliente/aplicación</p>
+	 * <p>
+	 * Consulta la ruta del fichero de configuración de métricas e indicadores del
+	 * cliente/aplicación
+	 * </p>
+	 * 
 	 * @return
 	 */
 	public static String getAppRI() {
@@ -104,7 +119,8 @@ public class Context {
 	}
 
 	/**
-	 * @return la ruta al fichero de configuración de indicadores y métricas por defecto
+	 * @return la ruta al fichero de configuración de indicadores y métricas por
+	 *         defecto
 	 */
 	public static String getDefaultRI() {
 		return defaultFile;
@@ -151,7 +167,7 @@ public class Context {
 		// instalación y de ahí coger el fichero de configuración
 		// También podría localizarse en el home de usuario
 		getContext().properties.load(new FileInputStream(appConPath));
-		log.info("Las nuevas propiedades son "+getContext().properties);
+		log.info("Las nuevas propiedades son " + getContext().properties);
 	}
 
 	public Checker getChecker() {
@@ -195,17 +211,19 @@ public class Context {
 	 * @return La fuente por defecto para indicadores y métricas
 	 */
 	public Font getDefaultFont() {
-		//OJO el color no forma parte de la clase font, por loq ue ese atributo debe estar fuera
-		//Podría incluir un parámetro font para devolverlo a la salida y que lo que devuelva sea un String con el color
+		// OJO el color no forma parte de la clase font, por loq ue ese atributo debe
+		// estar fuera
+		// Podría incluir un parámetro font para devolverlo a la salida y que lo que
+		// devuelva sea un String con el color
 		log.info("Busca la información de configuración de la fuente, por defecto");
-	
+
 		// TO DO
 		String color = properties.getProperty("Font.default.color");
 		String height = properties.getProperty("Font.default.height");
 		String type = properties.getProperty("Font.default.type");
-		log.info("Los datos son, color: "+color+" height: "+height+" type: "+type);
+		log.info("Los datos son, color: " + color + " height: " + height + " type: " + type);
 		log.info("Intento crear la fuente");
-		
+
 		return new Font(type, Font.ITALIC, Integer.valueOf(height));
 	}
 
@@ -214,8 +232,8 @@ public class Context {
 	 * No Implementado
 	 * </p>
 	 * <p>
-	 * Deberá leer las propiedades adecuadas, como color, tamaño, tipo... y construir
-	 * un objeto Font
+	 * Deberá leer las propiedades adecuadas, como color, tamaño, tipo... y
+	 * construir un objeto Font
 	 * </p>
 	 * <p>
 	 * Si no se ha definido una fuente para las métricas se debe devolver la fuente

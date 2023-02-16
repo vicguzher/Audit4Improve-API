@@ -23,11 +23,11 @@ public class ReportItem<T> implements ReportItemI<T> {
 	private IndicatorI indicator = null;
 	private static Logger log = Logger.getLogger(ReportItem.class.getName());
 	/**
-	 * Nombre del indicador/m�trica
+	 * Nombre del indicador/métrica
 	 */
 	private String name;
 	/**
-	 * Valor del indicador/m�trica
+	 * Valor del indicador/métrica
 	 */
 	private T value;
 	/**

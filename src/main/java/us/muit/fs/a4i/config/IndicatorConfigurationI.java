@@ -16,17 +16,22 @@ import us.muit.fs.a4i.model.entities.ReportItemI;
  */
 public interface IndicatorConfigurationI {
 	/**
-	 * <p>Verifica si el indicador existe y el tipo es correcto</p>
+	 * <p>
+	 * Verifica si el indicador existe y el tipo es correcto
+	 * </p>
+	 * 
 	 * @param name nombre del indicador
 	 * @param type tipo del valor del indicador
 	 * @return mapa con los detalles del indicador
-	 * @throws FileNotFoundException si hay algún problema con el fichero de configuración
+	 * @throws FileNotFoundException si hay algún problema con el fichero de
+	 *                               configuración
 	 */
 	public HashMap<String, String> definedIndicator(String name, String type) throws FileNotFoundException;
 
 	/**
 	 * @return lista con los nombres de todos los indicadores disponibles
-	 * @throws FileNotFoundException en caso de problemas con el fichero de configuración
+	 * @throws FileNotFoundException en caso de problemas con el fichero de
+	 *                               configuración
 	 */
 	public List<String> listAllIndicators() throws FileNotFoundException;
 

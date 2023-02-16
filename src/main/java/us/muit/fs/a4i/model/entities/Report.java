@@ -30,17 +30,6 @@ public class Report implements ReportI {
 	 * </p>
 	 */
 	private String entityId;
-	/**
-	 * <p>
-	 * Los objetos que implementen esta interfaz recurren a calcuadoras con los
-	 * algoritmos para el cálculo de indicadores
-	 * <p>
-	 * <p>
-	 * Los algoritmos de cálculo de indicadores serán específicos para un tipo de
-	 * informe
-	 * <p>
-	 */
-	private IndicatorsCalculator calc;
 
 	private ReportI.ReportType type = null;
 	/**
@@ -93,6 +82,7 @@ public class Report implements ReportI {
 	 * @param name Nombre de la métrica buscada
 	 * @return la métrica localizada
 	 */
+	@Override
 	public ReportItemI getMetricByName(String name) {
 		log.info("solicitada m�trica de nombre " + name);
 		ReportItemI metric = null;
@@ -148,7 +138,7 @@ public class Report implements ReportI {
 	public void addIndicator(ReportItemI ind) {
 
 		indicators.put(ind.getName(), ind);
-		log.info("A�adido indicador " + ind);
+		log.info("Añadido indicador " + ind);
 
 	}
 
@@ -166,7 +156,7 @@ public class Report implements ReportI {
 	@Override
 	public String toString() {
 		String repoinfo;
-		repoinfo = "Informaci�n del Informe:\n - Métricas: ";
+		repoinfo = "Información del Informe:\n - Métricas: ";
 		for (String clave : metrics.keySet()) {
 			repoinfo += "\n Clave: " + clave + metrics.get(clave);
 		}
@@ -179,13 +169,13 @@ public class Report implements ReportI {
 
 	@Override
 	public Collection<ReportItemI> getAllMetrics() {
-		// TODO Auto-generated method stub
+
 		return metrics.values();
 	}
 
 	@Override
 	public Collection<ReportItemI> getAllIndicators() {
-		// TODO Auto-generated method stub
+
 		return indicators.values();
 	}
 

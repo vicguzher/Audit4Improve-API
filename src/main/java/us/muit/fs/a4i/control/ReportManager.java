@@ -95,6 +95,7 @@ public class ReportManager implements ReportManagerI {
 	 * @param report El informe que se quiere borrar
 	 */
 	public static void deleteReport(ReportI report) {
+		log.info("deleteReport No implementado");
 
 	}
 

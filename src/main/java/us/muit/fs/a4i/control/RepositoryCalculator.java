@@ -23,6 +23,7 @@ import us.muit.fs.a4i.model.entities.ReportI;
  */
 public class RepositoryCalculator implements IndicatorsCalculator {
 	private static Logger log = Logger.getLogger(RepositoryCalculator.class.getName());
+	private static ReportI.ReportType reportType = ReportI.ReportType.REPOSITORY;
 
 	@Override
 	public void calcIndicator(String indicatorName, ReportManagerI reportManager) throws IndicatorException {
@@ -53,7 +54,7 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 
 	@Override
 	public ReportI.ReportType getReportType() {
-		return ReportI.ReportType.REPOSITORY;
+		return reportType;
 	}
 
 }
