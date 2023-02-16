@@ -29,4 +29,5 @@ Para ello se utilizan:
 - La API [Apache-POI](https://poi.apache.org/index.html)
 
 ## [JavaDoc](https://mit-fs.github.io/Audit4Improve-API/javadoc/)
+Versión no estable del JavaDoc correspondiente a la versión V.0.2
 

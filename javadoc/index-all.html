@@ -115,10 +115,9 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="us/muit/fs/a4i/config/Checker.html" class="type-name-link" title="class in us.muit.fs.a4i.config">Checker</a> - Class in <a href="us/muit/fs/a4i/config/package-summary.html">us.muit.fs.a4i.config</a></dt>
 <dd>
-<div class="block">Mantengo separada la lógica de la gestión de configuración de métricas e
- indicadores porque en el futuro van a ser bastante diferentes En la versión
- actual son muy similares y por tanto el diseño no es bueno ya que no
- identifica bien la reutilización</div>
+<div class="block">Esta clase permite acceder a las interfaces para configurar y verificar métricas e indicadores
+ Se mantiene separada la lógica de la gestión de configuración de métricas e
+ indicadores porque en el futuro van a ser bastante diferentes.</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/config/Context.html" class="type-name-link" title="class in us.muit.fs.a4i.config">Context</a> - Class in <a href="us/muit/fs/a4i/config/package-summary.html">us.muit.fs.a4i.config</a></dt>
 <dd>
@@ -140,7 +139,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="us/muit/fs/a4i/config/IndicatorConfiguration.html#definedIndicator(java.lang.String,java.lang.String)" class="member-name-link">definedIndicator(String, String)</a> - Method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/IndicatorConfiguration.html" title="class in us.muit.fs.a4i.config">IndicatorConfiguration</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="us/muit/fs/a4i/config/IndicatorConfigurationI.html#definedIndicator(java.lang.String,java.lang.String)" class="member-name-link">definedIndicator(String, String)</a> - Method in interface us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/IndicatorConfigurationI.html" title="interface in us.muit.fs.a4i.config">IndicatorConfigurationI</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">
+ Verifica si el indicador existe y el tipo es correcto</div>
+</dd>
 <dt><a href="us/muit/fs/a4i/config/MetricConfiguration.html#definedMetric(java.lang.String,java.lang.String)" class="member-name-link">definedMetric(String, String)</a> - Method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/MetricConfiguration.html" title="class in us.muit.fs.a4i.config">MetricConfiguration</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="us/muit/fs/a4i/config/MetricConfigurationI.html#definedMetric(java.lang.String,java.lang.String)" class="member-name-link">definedMetric(String, String)</a> - Method in interface us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/MetricConfigurationI.html" title="interface in us.muit.fs.a4i.config">MetricConfigurationI</a></dt>
@@ -225,7 +227,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Obtiene todas las métricas del informe</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/config/Context.html#getAppRI()" class="member-name-link">getAppRI()</a> - Static method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/Context.html" title="class in us.muit.fs.a4i.config">Context</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">
+ Consulta la ruta del fichero de configuración de métricas e indicadores del
+ cliente/aplicación</div>
+</dd>
 <dt><a href="us/muit/fs/a4i/model/remote/GitHubEnquirer.html#getAvailableMetrics()" class="member-name-link">getAvailableMetrics()</a> - Method in class us.muit.fs.a4i.model.remote.<a href="us/muit/fs/a4i/model/remote/GitHubEnquirer.html" title="class in us.muit.fs.a4i.model.remote">GitHubEnquirer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="us/muit/fs/a4i/model/remote/RemoteEnquirer.html#getAvailableMetrics()" class="member-name-link">getAvailableMetrics()</a> - Method in interface us.muit.fs.a4i.model.remote.<a href="us/muit/fs/a4i/model/remote/RemoteEnquirer.html" title="interface in us.muit.fs.a4i.model.remote">RemoteEnquirer</a></dt>
@@ -408,7 +414,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="us/muit/fs/a4i/config/Context.html#getPropertiesNames()" class="member-name-link">getPropertiesNames()</a> - Method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/Context.html" title="class in us.muit.fs.a4i.config">Context</a></dt>
 <dd>
 <div class="block">
- Consulta el nombre de todas las propiedades le�dasí</div>
+ Consulta el nombre de todas las propiedades leídas</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/config/Context.html#getRemoteType()" class="member-name-link">getRemoteType()</a> - Method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/Context.html" title="class in us.muit.fs.a4i.config">Context</a></dt>
 <dd>
@@ -626,7 +632,9 @@ loadScripts(document, 'script');</script>
  en un medio "visual"</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/model/entities/ReportI.html" class="type-name-link" title="interface in us.muit.fs.a4i.model.entities">ReportI</a> - Interface in <a href="us/muit/fs/a4i/model/entities/package-summary.html">us.muit.fs.a4i.model.entities</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Interfaz para la gestión de informes</div>
+</dd>
 <dt><a href="us/muit/fs/a4i/model/entities/ReportI.ReportType.html" class="type-name-link" title="enum class in us.muit.fs.a4i.model.entities">ReportI.ReportType</a> - Enum Class in <a href="us/muit/fs/a4i/model/entities/package-summary.html">us.muit.fs.a4i.model.entities</a></dt>
 <dd>
 <div class="block">
@@ -669,7 +677,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="us/muit/fs/a4i/control/RepositoryCalculator.html" class="type-name-link" title="class in us.muit.fs.a4i.control">RepositoryCalculator</a> - Class in <a href="us/muit/fs/a4i/control/package-summary.html">us.muit.fs.a4i.control</a></dt>
 <dd>
 <div class="block">
- Implementa los m�todos para calcular indicadores referidos a un repositorio
+ Implementa los métodos para calcular indicadores referidos a un repositorio
  repositorio</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/control/RepositoryCalculator.html#%3Cinit%3E()" class="member-name-link">RepositoryCalculator()</a> - Constructor for class us.muit.fs.a4i.control.<a href="us/muit/fs/a4i/control/RepositoryCalculator.html" title="class in us.muit.fs.a4i.control">RepositoryCalculator</a></dt>
@@ -703,7 +711,11 @@ loadScripts(document, 'script');</script>
  Establece el fichero de configuración específico de la aplicación cliente.</div>
 </dd>
 <dt><a href="us/muit/fs/a4i/config/Context.html#setAppRI(java.lang.String)" class="member-name-link">setAppRI(String)</a> - Static method in class us.muit.fs.a4i.config.<a href="us/muit/fs/a4i/config/Context.html" title="class in us.muit.fs.a4i.config">Context</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">
+ Establece la ruta del fichero de métricas e indicadores indicado por el
+ cliente/aplicación</div>
+</dd>
 <dt><a href="us/muit/fs/a4i/persistence/ReportFormater.html#setDefaultFont(java.awt.Font)" class="member-name-link">setDefaultFont(Font)</a> - Method in class us.muit.fs.a4i.persistence.<a href="us/muit/fs/a4i/persistence/ReportFormater.html" title="class in us.muit.fs.a4i.persistence">ReportFormater</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="us/muit/fs/a4i/persistence/ReportFormaterI.html#setDefaultFont(java.awt.Font)" class="member-name-link">setDefaultFont(Font)</a> - Method in interface us.muit.fs.a4i.persistence.<a href="us/muit/fs/a4i/persistence/ReportFormaterI.html" title="interface in us.muit.fs.a4i.persistence">ReportFormaterI</a></dt>
