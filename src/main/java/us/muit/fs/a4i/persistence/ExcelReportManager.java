@@ -122,7 +122,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 	 * @throws EncryptedDocumentException documento protegido
 	 */
 	protected HSSFSheet getCleanSheet(String entityId) throws EncryptedDocumentException, IOException {
-		log.info("Solicita una hoja nueva del libro manejado");
+		log.info("Solicita una hoja nueva del libro manejado, para la entidad con id: "+entityId);
 		if (wb == null) {
 			inputStream = new FileInputStream(filePath + fileName + ".xls");
 			wb = (HSSFWorkbook) WorkbookFactory.create(inputStream);
@@ -165,7 +165,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 	 */
 	@Override
 	public void saveReport(ReportI report) throws ReportNotDefinedException {
-		log.info("Guardando informe");
+		log.info("Guardando informe con id: "+report.getEntityId());
 		if (report == null) {
 			throw new ReportNotDefinedException();
 		}
@@ -219,7 +219,7 @@ public class ExcelReportManager implements PersistenceManager, FileManager {
 		// https://www.e-iceblue.com/Tutorials/Java/Spire.XLS-for-Java/Program-Guide/Cells/Apply-Fonts-in-Excel-in-Java.html
 
 		CellStyle style = wb.createCellStyle();
-		style.setFont((Font) formater.getMetricFont());
+		//style.setFont((Font) formater.getMetricFont());
 
 		row.createCell(cellIndex++).setCellValue(metric.getName());
 		row.createCell(cellIndex++).setCellValue(metric.getValue().toString());

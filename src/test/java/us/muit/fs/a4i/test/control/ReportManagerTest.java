@@ -68,7 +68,7 @@ class ReportManagerTest {
 			report = manager.newReport("MIT-FS/Audit4Improve-API", ReportI.ReportType.REPOSITORY);
 			log.info("Creado el informe");
 		} catch (Exception e) {
-			fail("Se lanza alguna excepci�n al crear el gestor o el informe");
+			fail("Se lanza alguna excepción al crear el gestor o el informe");
 			e.printStackTrace();
 		}
 		assertNotNull(report, "No se ha construido el informe");
