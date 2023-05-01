@@ -38,7 +38,7 @@
 		{
 			"name": "lastPush",
 			"type": "java.util.Date",
-			"description": "Último push realizado en el repositorio",
+			"description": "Ãšltimo push realizado en el repositorio",
 			"unit": "date"
 		}
 	],
