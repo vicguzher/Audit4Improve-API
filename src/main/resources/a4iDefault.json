@@ -43,13 +43,13 @@
 		},
 		{
 			"name": "openIssues",
-			"type": "java.lang.Integer",
+			"type": "java.lang.Double",
 			"description": "Numero de issues abiertas",
 			"unit": "issues"
 		},
 		{
 			"name": "closedIssues",
-			"type": "java.lang.Integer",
+			"type": "java.lang.Double",
 			"description": "Numero de issues cerradas",
 			"unit": "issues"
 		}
