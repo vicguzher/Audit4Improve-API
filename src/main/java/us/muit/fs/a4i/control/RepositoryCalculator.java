@@ -32,7 +32,6 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 	private static ReportI.ReportType reportType = ReportI.ReportType.REPOSITORY;
 	private static HashMap<String, IndicatorStrategy> strategies = new HashMap<>();
 
-
 	@Override
 	public void calcIndicator(String indicatorName, ReportManagerI reportManager) throws IndicatorException {
 		log.info("Calcula el indicador de nombre " + indicatorName);
@@ -45,18 +44,17 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 		List<String> requiredMetrics = indicatorStrategy.requiredMetrics();
 		List<ReportItemI> metrics = reportManager.getReport().getAllMetrics().stream().collect(Collectors.toList());
 		List<String> metricsName = metrics.stream().map(ReportItemI::getName).collect(Collectors.toList());
-		if(metricsName.containsAll(requiredMetrics)) {
+		if (metricsName.containsAll(requiredMetrics)) {
 			try {
 				indicatorStrategy.calcIndicator(metrics);
 			} catch (NotAvailableMetricException e) {
 				log.info("No se han proporcionado las m�tricas necesarias");
 				e.printStackTrace();
 			}
+		} else {
+			log.info("No se han proporcionado las m�tricas necesarias");
 		}
-			
-		
-		
-		
+
 	}
 
 	/**
@@ -84,7 +82,7 @@ public class RepositoryCalculator implements IndicatorsCalculator {
 	public void setIndicator(String indicatorName, IndicatorStrategy strategy) {
 		// TODO Auto-generated method stub
 		strategies.put(indicatorName, strategy);
-		
+
 	}
 
 }
