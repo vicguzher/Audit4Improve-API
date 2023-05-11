@@ -6,14 +6,15 @@ import us.muit.fs.a4i.exceptions.NotAvailableMetricException;
 import us.muit.fs.a4i.model.entities.ReportItemI;
 
 /**
- * 
+ * /**
  * <p>
  * Interfaz para calcular indicadores
  * <p>
+ * @param <T>
  * @author celllarod
  *
  */
-public interface IndicatorStrategy {
+public interface IndicatorStrategy<T> {
 	
 
     /**
@@ -23,7 +24,7 @@ public interface IndicatorStrategy {
      * @throws NotAvailableMetricException
      * @return indicador
      */
-	public <T> ReportItemI<T>  calcIndicator(List<ReportItemI<T>> metrics) throws NotAvailableMetricException;
+	public  ReportItemI<T>  calcIndicator(List<ReportItemI<T>> metrics) throws NotAvailableMetricException;
 	
 	
 	/**
