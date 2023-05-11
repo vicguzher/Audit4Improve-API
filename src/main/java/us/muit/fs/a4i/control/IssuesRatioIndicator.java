@@ -16,12 +16,12 @@ public class IssuesRatioIndicator implements IndicatorStrategy<Double> {
 
 	private static Logger log = Logger.getLogger(Indicator.class.getName());
 
-	// Métricas necesarias para calcular el indicador
+	// Mï¿½tricas necesarias para calcular el indicador
 	private static final List<String> REQUIRED_METRICS = Arrays.asList("openIssues", "closedIssues");
 
 	@Override
 	public ReportItemI<Double> calcIndicator(List<ReportItemI<Double>> metrics) throws NotAvailableMetricException {
-		// Se obtienen y se comprueba que se pasan las métricas necesarias para calcular
+		// Se obtienen y se comprueba que se pasan las mï¿½tricas necesarias para calcular
 		// el indicador.
 		Optional<ReportItemI<Double>>  openIssues = metrics.stream().filter(m -> REQUIRED_METRICS.get(0).equals(m.getName())).findAny();
 		Optional<ReportItemI<Double>>  closedIssues = metrics.stream().filter(m -> REQUIRED_METRICS.get(1).equals(m.getName())).findAny();
@@ -29,7 +29,7 @@ public class IssuesRatioIndicator implements IndicatorStrategy<Double> {
 
 		if (openIssues.isPresent() && closedIssues.isPresent()) {
 
-			// Se realiza el cálculo del indicador
+			// Se realiza el cï¿½lculo del indicador
 			Double issuesRatio = openIssues.get().getValue()/closedIssues.get().getValue();
 
 			try {
@@ -43,8 +43,8 @@ public class IssuesRatioIndicator implements IndicatorStrategy<Double> {
 			}
 
 		} else {
-			log.info("No se han proporcionado las métricas necesarias");
-			throw new NotAvailableMetricException("No se han proporcionado las métricas necesarias");
+			log.info("No se han proporcionado las mï¿½tricas necesarias");
+			throw new NotAvailableMetricException("No se han proporcionado las metricas necesarias");
 		}
 
 		return  indicatorReport;
@@ -52,7 +52,7 @@ public class IssuesRatioIndicator implements IndicatorStrategy<Double> {
 
 	@Override
 	public List<String> requiredMetrics() {
-		// Para calcular el indicador "IssuesRatio", serán necesarias las métricas
+		// Para calcular el indicador "IssuesRatio", serï¿½n necesarias las mï¿½tricas
 		// "openIssues" y "closedIssues".
 		return REQUIRED_METRICS;
 	}
