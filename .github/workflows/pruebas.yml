@@ -1,42 +1,42 @@
 name: Flujo de trabajo para construcción y prueba
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ V.0.2 ]
-  pull_request:
-    branches: [ V.0.2 ]
-  schedule:
-    - cron: '1 23 * * 0-4'
+  workflow_dispatch:
+  push:
+    branches: [ V.0.2 ]
+  pull_request:
+    branches: [ V.0.2 ]
+  schedule:
+    - cron: '1 23 * * 0-4'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clonando el repositorio y estableciendo el espacio de trabajo
-        uses: actions/checkout@v3
-      - name: Configurando java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '16'
-      - name: Construyendo el artefacto
-        run: |
-          chmod +x gradlew
-          ./gradlew assemble
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonando el repositorio y estableciendo el espacio de trabajo
+        uses: actions/checkout@v3
+      - name: Configurando java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '16'
+      - name: Construyendo el artefacto
+        run: |
+          chmod +x gradlew
+          ./gradlew assemble
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clonando el repositorio y estableciendo el espacio de trabajo
-        uses: actions/checkout@v3
-      - name: Configurando java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '16'
-      - name: Ejecutando pruebas
-        run: |
-          chmod +x gradlew
-          ./gradlew test
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonando el repositorio y estableciendo el espacio de trabajo
+        uses: actions/checkout@v3
+      - name: Configurando java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '16'
+      - name: Ejecutando pruebas
+        run: |
+          chmod +x gradlew
+          ./gradlew test
