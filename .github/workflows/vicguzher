@@ -2,9 +2,6 @@ name: vicguzher
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - V.0.2
   issues:
     types: 
       - opened
