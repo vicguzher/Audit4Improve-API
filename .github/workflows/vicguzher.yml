@@ -6,34 +6,9 @@ on:
     types: [opened]
 
 jobs:
-  build:
+  issue-notification:
     runs-on: ubuntu-latest
     steps:
-      - name: Clonar el repositorio y establecer el espacio de trabajo
-        uses: actions/checkout@v3
-      - name: Configurar Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '16'
-      - name: Construir el artefacto
-        run: |
-          chmod +x gradlew
-          ./gradlew assemble
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clonar el repositorio y establecer el espacio de trabajo
-        uses: actions/checkout@v3
-      - name: Configurar Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '16'
-      - name: Ejecutar pruebas
-        run: |
-          chmod +x gradlew
-          ./gradlew test
+      - name: Notificar sobre el nuevo issue
+        run: echo "Se ha creado un nuevo issue"
 
