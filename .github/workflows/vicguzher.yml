@@ -1,25 +1,23 @@
 name: vicguzher
 
 on:
-  workflow_dispatch:
   issues:
     types: 
       - opened
       - edited
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Clonando el repositorio y estableciendo el espacio de trabajo
+      - name: Clonar el repositorio y establecer el espacio de trabajo
         uses: actions/checkout@v3
-      - name: Configurando java
+      - name: Configurar Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '16'
-      - name: Construyendo el artefacto
+      - name: Construir el artefacto
         run: |
           chmod +x gradlew
           ./gradlew assemble
@@ -28,14 +26,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Clonando el repositorio y estableciendo el espacio de trabajo
+      - name: Clonar el repositorio y establecer el espacio de trabajo
         uses: actions/checkout@v3
-      - name: Configurando java
+      - name: Configurar Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '16'
-      - name: Ejecutando pruebas
+      - name: Ejecutar pruebas
         run: |
           chmod +x gradlew
           ./gradlew test
