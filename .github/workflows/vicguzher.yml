@@ -1,10 +1,11 @@
 name: vicguzher
 
 on:
+  workflow_dispatch:
   issues:
-    types: 
-      - opened
-      - edited
+      types: 
+        - opened
+        - edited
 
 jobs:
   build:
